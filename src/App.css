@@ -1,3 +1,18 @@
+:root {
+    --spiral-opacity: 30%;
+    --spiral-width: 301px;
+    --spiral-height: 215px;
+    --world-icons-width: 36px;
+    --world-icons-height: 36px;
+}
+
+#title {
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
     background: rgb(46, 1, 81);
     display: flex;
@@ -7,8 +22,16 @@ body {
 }
 
 #Spiral {
-    position: relative;
-    display: inline-block;
+    padding: 10px;
+    border-radius: 50px;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: var(--spiral-width);
+    height: var(--spiral-height);
+    opacity: var(--spiral-opacity);
+    transition: 0.1s ease-out;
 }
 
 #Spiral > img:first-child {
@@ -18,8 +41,8 @@ body {
 
 .world-icon {
     position: absolute; /* relative to container */
-    width: 110px;
-    height: 110px;
+    width: var(--world-icons-width);
+    height: var(--world-icons-height);
     transform: translate(-50%, -50%) translate(var(--offsetX, 0px), var(--offsetY, 0px));
 
     transition: 0.3s ease-out;
