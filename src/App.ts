@@ -9,18 +9,18 @@ var currentMapSize = MAP_SIZES.MEDIUM;
 
 // image src constants
 const SPIRAL_SRC = "./Images/Spiral.png";
-const WIZARD_CITY_ICON_SRC = "./Images/(Icon)_Wizard_City.png";
-const KROKOTOPIA_ICON_SRC = "./Images/(Icon)_Krokotopia.png";
-const MARLEYBONE_ICON_SRC = "./Images/(Icon)_Marleybone.png";
-const MOOSHU_ICON_SRC = "./Images/(Icon)_Mooshu.png";
-const DRAGONSPYRE_ICON_SRC = "./Images/(Icon)_Dragonspyre.png";
-const GRIZZLEHEIM_ICON_SRC = "./Images/(Icon)_Grizzleheim.png";
-const WYSTERIA_ICON_SRC = "./Images/(Icon)_Wysteria.png";
-const CELESTIA_ICON_SRC = "./Images/(Icon)_Celestia.png";
-const ZAFARIA_ICON_SRC = "./Images/(Icon)_Zafaria.png";
-const AVALON_ICON_SRC = "./Images/(Icon)_Avalon.png";
-const AZTECA_ICON_SRC = "./Images/(Icon)_Azteca.png";
-const KHRYSALIS_ICON_SRC = "./Images/(Icon)_Khrysalis.png";
+const WIZARD_CITY_ICON_SRC = "./Images/WorldIcons/(Icon)_Wizard_City.png";
+const KROKOTOPIA_ICON_SRC = "./Images/WorldIcons/(Icon)_Krokotopia.png";
+const MARLEYBONE_ICON_SRC = "./Images/WorldIcons/(Icon)_Marleybone.png";
+const MOOSHU_ICON_SRC = "./Images/WorldIcons/(Icon)_Mooshu.png";
+const DRAGONSPYRE_ICON_SRC = "./Images/WorldIcons/(Icon)_Dragonspyre.png";
+const GRIZZLEHEIM_ICON_SRC = "./Images/WorldIcons/(Icon)_Grizzleheim.png";
+const WYSTERIA_ICON_SRC = "./Images/WorldIcons/(Icon)_Wysteria.png";
+const CELESTIA_ICON_SRC = "./Images/WorldIcons/(Icon)_Celestia.png";
+const ZAFARIA_ICON_SRC = "./Images/WorldIcons/(Icon)_Zafaria.png";
+const AVALON_ICON_SRC = "./Images/WorldIcons/(Icon)_Avalon.png";
+const AZTECA_ICON_SRC = "./Images/WorldIcons/(Icon)_Azteca.png";
+const KHRYSALIS_ICON_SRC = "./Images/WorldIcons/(Icon)_Khrysalis.png";
 
 // set world icon classes
 const worlds = [
@@ -59,7 +59,6 @@ document.getElementById("Spiral")!.ondragstart = function () {
 
 /** Given MAP_SIZE enum value, changes size of spiral and world icons */
 function setMapSize(mapSize: MAP_SIZES): void {
-  
   // vars for both spiral and world-icon css properties
   const SCALE_FACTOR = 3;
 
