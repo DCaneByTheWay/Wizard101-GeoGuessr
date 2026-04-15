@@ -86,6 +86,48 @@ export function init(container: HTMLElement, worlds: World[]): void {
         applyTransform();
     });
 
+    // click and drag to pan while zoomed in
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let dragStartTX = 0;
+    let dragStartTY = 0;
+
+    container.addEventListener("mousedown", (e) => {
+        if (currentScale > MIN_SCALE) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            dragStartTX = translateX;
+            dragStartTY = translateY;
+            container.style.cursor = "grabbing";
+        }
+    });
+
+    window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - dragStartX;
+        const dy = e.clientY - dragStartY;
+        translateX = dragStartTX + dx;
+        translateY = dragStartTY + dy;
+
+        // clamp so content stays in bounds
+        const rect = container.getBoundingClientRect();
+        const minTX = rect.width - rect.width * currentScale;
+        const minTY = rect.height - rect.height * currentScale;
+        translateX = Math.min(0, Math.max(minTX, translateX));
+        translateY = Math.min(0, Math.max(minTY, translateY));
+
+        applyTransform();
+    });
+
+    window.addEventListener("mouseup", () => {
+        if (isDragging) {
+            isDragging = false;
+            container.style.cursor = "";
+        }
+    });
+
     // Initial render
     render(container, currentLevel, worlds, currentWorld, currentArea);
 }
