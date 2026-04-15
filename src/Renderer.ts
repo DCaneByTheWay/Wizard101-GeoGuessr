@@ -56,13 +56,18 @@ export function render(
     ): void {
     container.innerHTML = "";
 
+    // Inner wrapper so we can scale content without scaling the container/border
+    const inner = document.createElement("div");
+    inner.id = "spiral-content";
+    container.appendChild(inner);
+
     if (zoomlevel === 0) {
-        renderSpiral(container, worlds);
+        renderSpiral(inner, worlds);
     }
     else if (zoomlevel === 1 && currentWorld) {
-        renderWorldMap(container, currentWorld);
+        renderWorldMap(inner, currentWorld);
     }
     else if (zoomlevel === 2 && currentArea) {
-        renderArea(container, currentArea);
+        renderArea(inner, currentArea);
     }
 }

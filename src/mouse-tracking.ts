@@ -2,7 +2,6 @@
 const FOLLOW_RADIUS = 45;
 
 const spiral = document.getElementById("Spiral");
-const worldIcons = document.querySelectorAll<HTMLElement>(".world-icon");
 
 window.addEventListener("mousemove", (e) => {
   const rect = spiral?.getBoundingClientRect();
@@ -11,6 +10,7 @@ window.addEventListener("mousemove", (e) => {
   const mouseX = e.clientX - rect.left;
   const mouseY = e.clientY - rect.top;
 
+  const worldIcons = document.querySelectorAll<HTMLElement>(".world-icon");
   for (const icon of worldIcons) {
     // icon home pos
     const homeX = icon.offsetLeft;

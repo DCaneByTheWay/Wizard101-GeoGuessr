@@ -1,4 +1,4 @@
-import { init, ZoomLevel, getCurrentLevel } from "./ZoomController.js";
+import { init } from "./ZoomController.js";
 import { worlds } from "./WorldData.js";
 
 const container = document.getElementById("Spiral");

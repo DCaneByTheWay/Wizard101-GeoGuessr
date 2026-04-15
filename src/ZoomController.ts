@@ -11,12 +11,18 @@ let currentLevel = ZoomLevel.SPIRAL;
 let currentWorld: World | null = null;
 let currentArea: Area | null = null;
 let hoveredElement: HTMLElement | null = null;
-let scrollAccumulator = 0;
 
-const SCROLL_THRESHOLD = 300;
+let currentScale = 1.0;
+let translateX = 0;
+let translateY = 0;
+const MIN_SCALE = 1.0;
+const MAX_SCALE = 2;
+const ZOOM_SPEED = 0.05;
+let zoomOutTicks = 0;
+const ZOOM_OUT_THRESHOLD = 15;
 
 export function init(container: HTMLElement, worlds: World[]): void {
-    // Track what the user is hovering over
+    // track what the user is hovering over
     container.addEventListener("mouseover", (e) => {
         const target = e.target as HTMLElement;
         if (target.classList.contains("world-icon") || target.classList.contains("area-hotspot")) {
@@ -31,52 +37,149 @@ export function init(container: HTMLElement, worlds: World[]): void {
         }
     });
 
-    // Scroll to zoom in/out
+    // scroll to zoom in/out
     container.addEventListener("wheel", (e) => {
         e.preventDefault();
-        scrollAccumulator += e.deltaY;
+        const direction = e.deltaY > 0 ? -1 : 1;
+        const oldScale = currentScale;
+        let newScale = currentScale + direction * ZOOM_SPEED;
 
-        if (scrollAccumulator < -SCROLL_THRESHOLD) {
-            zoomIn(container, worlds);
-            scrollAccumulator = 0;
-        } else if (scrollAccumulator > SCROLL_THRESHOLD) {
-            zoomOut(container, worlds);
-            scrollAccumulator = 0;
+        if (newScale >= MAX_SCALE) {
+            zoomOutTicks = 0;
+            if (zoomIn(container, worlds)) {
+                currentScale = 1.0;
+                translateX = 0;
+                translateY = 0;
+            } else {
+                currentScale = MAX_SCALE;
+                adjustTranslate(container, oldScale, e);
+            }
+        } else if (newScale <= MIN_SCALE) {
+            currentScale = MIN_SCALE;
+            zoomOutTicks++;
+            if (zoomOutTicks >= ZOOM_OUT_THRESHOLD) {
+                zoomOutTicks = 0;
+                // keep track of previous map
+                const prevWorld = currentWorld;
+                const prevArea = currentArea;
+                if (zoomOut(container, worlds)) {
+                    currentScale = MAX_SCALE;
+                    translateX = 0;
+                    translateY = 0;
+                    // center on the element we just zoomed out from
+                    if (prevArea && currentLevel === ZoomLevel.WORLD) {
+                        centerOnTarget(container, `[data-area="${prevArea.name}"]`);
+                    } else if (prevWorld && currentLevel === ZoomLevel.SPIRAL) {
+                        centerOnTarget(container, `.${prevWorld.class}`);
+                    }
+                }
+            } else {
+                translateX = 0;
+                translateY = 0;
+            }
+        } else {
+            zoomOutTicks = 0;
+            currentScale = newScale;
+            adjustTranslate(container, oldScale, e);
         }
+        
+        applyTransform();
     });
 
     // Initial render
     render(container, currentLevel, worlds, currentWorld, currentArea);
 }
 
-function zoomIn(container: HTMLElement, worlds: World[]): void {
+function adjustTranslate(container: HTMLElement, oldScale: number, e: WheelEvent): void {
+    const rect = container.getBoundingClientRect();
+    // Mouse position relative to the container (0 to 1)
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    // Point on the content under the cursor before zoom
+    const contentX = (mouseX - translateX) / oldScale;
+    const contentY = (mouseY - translateY) / oldScale;
+
+    // New translate so the same content point stays under the cursor
+    translateX = mouseX - contentX * currentScale;
+    translateY = mouseY - contentY * currentScale;
+
+    // Clamp so content doesn't go out of bounds
+    const maxTranslateX = 0;
+    const maxTranslateY = 0;
+    const minTranslateX = rect.width - rect.width * currentScale;
+    const minTranslateY = rect.height - rect.height * currentScale;
+
+    translateX = Math.min(maxTranslateX, Math.max(minTranslateX, translateX));
+    translateY = Math.min(maxTranslateY, Math.max(minTranslateY, translateY));
+}
+
+function centerOnTarget(container: HTMLElement, targetSelector: string): void {
+    const inner = document.getElementById("spiral-content");
+    const el = inner?.querySelector(targetSelector) as HTMLElement | null;
+    if (!el || !inner) return;
+
+    const rect = container.getBoundingClientRect();
+
+    // Element center in content (unscaled) coordinates
+    const elCenterX = el.offsetLeft + el.offsetWidth / 2;
+    const elCenterY = el.offsetTop + el.offsetHeight / 2;
+
+    // Translate so element center aligns with container center
+    translateX = rect.width / 2 - elCenterX * currentScale;
+    translateY = rect.height / 2 - elCenterY * currentScale;
+
+    // Clamp so content stays in bounds
+    const minTranslateX = rect.width - rect.width * currentScale;
+    const minTranslateY = rect.height - rect.height * currentScale;
+    translateX = Math.min(0, Math.max(minTranslateX, translateX));
+    translateY = Math.min(0, Math.max(minTranslateY, translateY));
+}
+
+function applyTransform(): void {
+    const inner = document.getElementById("spiral-content");
+    if (inner) {
+        inner.style.transformOrigin = "0 0";
+        inner.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+    }
+}
+
+function zoomIn(container: HTMLElement, worlds: World[]): boolean {
     if (currentLevel === ZoomLevel.SPIRAL && hoveredElement) {
         const worldClass = hoveredElement.dataset.world;
         currentWorld = worlds.find(w => w.class === worldClass) ?? null;
         if (currentWorld) {
             currentLevel = ZoomLevel.WORLD;
+            render(container, currentLevel, worlds, currentWorld, currentArea);
+            return true;
         }
     } else if (currentLevel === ZoomLevel.WORLD && hoveredElement && currentWorld) {
         const areaName = hoveredElement.dataset.area;
         currentArea = currentWorld.areas.find(a => a.name === areaName) ?? null;
         if (currentArea) {
             currentLevel = ZoomLevel.AREA;
+            render(container, currentLevel, worlds, currentWorld, currentArea);
+            return true;
         }
     }
 
-    render(container, currentLevel, worlds, currentWorld, currentArea);
+    return false;
 }
 
-function zoomOut(container: HTMLElement, worlds: World[]): void {
+function zoomOut(container: HTMLElement, worlds: World[]): boolean {
     if (currentLevel === ZoomLevel.AREA) {
         currentLevel = ZoomLevel.WORLD;
         currentArea = null;
+        render(container, currentLevel, worlds, currentWorld, currentArea);
+        return true;
     } else if (currentLevel === ZoomLevel.WORLD) {
         currentLevel = ZoomLevel.SPIRAL;
         currentWorld = null;
+        render(container, currentLevel, worlds, currentWorld, currentArea);
+        return true;
     }
 
-    render(container, currentLevel, worlds, currentWorld, currentArea);
+    return false;
 }
 
 export function getCurrentLevel(): ZoomLevel {
