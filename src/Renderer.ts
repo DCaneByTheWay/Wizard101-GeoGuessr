@@ -35,6 +35,7 @@ export function renderWorldMap(container: HTMLElement, world: World): void {
         hotspot.style.left = area.left;
         hotspot.style.width = area.width;
         hotspot.style.height = area.height;
+        hotspot.append(area.name);
         container.appendChild(hotspot);
     }
 }

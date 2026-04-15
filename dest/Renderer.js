@@ -29,6 +29,7 @@ export function renderWorldMap(container, world) {
         hotspot.style.left = area.left;
         hotspot.style.width = area.width;
         hotspot.style.height = area.height;
+        hotspot.append(area.name);
         container.appendChild(hotspot);
     }
 }
