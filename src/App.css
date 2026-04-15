@@ -49,6 +49,14 @@ body {
     transition-property: transform, width, border, background-color;
 }
 
+.area-hotspot {
+    position: absolute;
+    cursor: pointer;
+    background: transparent;
+    /* debug: uncomment to see hotspots */
+    /* background: rgba(255, 0, 0, 0.3); */
+}
+
 .wizard-city { top: 30%; left: 47%; }
 .krokotopia { top: 46%; left: 37%; }
 .marleybone { top: 54%; left: 49%; }

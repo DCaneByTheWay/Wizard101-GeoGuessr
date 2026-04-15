@@ -1,0 +1,1 @@
+{"version":3,"file":"ZoomController.d.ts","sourceRoot":"","sources":["../src/ZoomController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAQ,MAAM,gBAAgB,CAAC;AAG7C,oBAAY,SAAS;IACjB,MAAM,IAAI;IACV,KAAK,IAAI;IACT,IAAI,IAAI;CACX;AAUD,wBAAgB,IAAI,CAAC,SAAS,EAAE,WAAW,EAAE,MAAM,EAAE,KAAK,EAAE,GAAG,IAAI,CAgClE;AAgCD,wBAAgB,eAAe,IAAI,SAAS,CAE3C"}
