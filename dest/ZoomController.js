@@ -168,4 +168,7 @@ function zoomOut(container, worlds) {
 export function getCurrentLevel() {
     return currentLevel;
 }
+export function getTransform() {
+    return { scale: currentScale, tx: translateX, ty: translateY };
+}
 //# sourceMappingURL=ZoomController.js.map

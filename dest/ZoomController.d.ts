@@ -6,4 +6,9 @@ export declare enum ZoomLevel {
 }
 export declare function init(container: HTMLElement, worlds: World[]): void;
 export declare function getCurrentLevel(): ZoomLevel;
+export declare function getTransform(): {
+    scale: number;
+    tx: number;
+    ty: number;
+};
 //# sourceMappingURL=ZoomController.d.ts.map

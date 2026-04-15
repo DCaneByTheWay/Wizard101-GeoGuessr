@@ -185,3 +185,7 @@ function zoomOut(container: HTMLElement, worlds: World[]): boolean {
 export function getCurrentLevel(): ZoomLevel {
     return currentLevel
 }
+
+export function getTransform(): { scale: number; tx: number; ty: number } {
+    return { scale: currentScale, tx: translateX, ty: translateY };
+}

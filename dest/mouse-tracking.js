@@ -1,15 +1,21 @@
 // pixels from cursor to follow
 const FOLLOW_RADIUS = 45;
+import { getTransform } from "./ZoomController.js";
 const spiral = document.getElementById("Spiral");
 window.addEventListener("mousemove", (e) => {
     const rect = spiral?.getBoundingClientRect();
     if (!rect)
         return;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    // mouse position relative to container
+    const screenX = e.clientX - rect.left;
+    const screenY = e.clientY - rect.top;
+    // convert to content (unscaled) pos
+    const { scale, tx, ty } = getTransform();
+    const mouseX = (screenX - tx) / scale;
+    const mouseY = (screenY - ty) / scale;
     const worldIcons = document.querySelectorAll(".world-icon");
     for (const icon of worldIcons) {
-        // icon home pos
+        // icon home pos in content pos
         const homeX = icon.offsetLeft;
         const homeY = icon.offsetTop;
         const dx = mouseX - homeX;
@@ -25,5 +31,4 @@ window.addEventListener("mousemove", (e) => {
         }
     }
 });
-export {};
 //# sourceMappingURL=mouse-tracking.js.map
