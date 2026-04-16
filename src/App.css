@@ -1,7 +1,7 @@
 :root {
     --spiral-opacity: 30%;
-    --spiral-width: 301px;
-    --spiral-height: 215px;
+    --spiral-width: 270px;
+    --spiral-height: 240px;
     --world-icons-width: 36px;
     --world-icons-height: 36px;
 }
@@ -43,7 +43,8 @@ body {
 
 #Spiral > #spiral-content > img:first-child {
     display: block;
-    width: 100%
+    width: 100%;
+    height: 100%;
 }
 
 .world-icon {
@@ -57,11 +58,14 @@ body {
 }
 
 .area-hotspot {
+
+    user-select: none;
     position: absolute;
     cursor: pointer;
     background: transparent;
     /* debug: uncomment to see hotspots */
     /* background: rgba(255, 0, 0, 0.3); */
+    color: transparent
 }
 
 .wizard-city { top: 30%; left: 47%; }
