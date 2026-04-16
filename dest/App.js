@@ -1,4 +1,4 @@
-import { init } from "./ZoomController.js";
+import { init, saveAndScaleTransform, restoreTransform } from "./ZoomController.js";
 import { worlds } from "./WorldData.js";
 import { render } from "./Renderer.js";
 import { getRandomImagePath, startRound } from "./GameController.js";
@@ -13,10 +13,9 @@ var MAP_SIZES;
     MAP_SIZES[MAP_SIZES["LARGE"] = 3] = "LARGE";
 })(MAP_SIZES || (MAP_SIZES = {}));
 var currentMapSize = MAP_SIZES.MEDIUM;
+const SCALE_FACTOR = 3;
 /** Given MAP_SIZE enum value, changes size of spiral and world icons */
 function setMapSize(mapSize) {
-    // vars for both spiral and world-icon css properties
-    const SCALE_FACTOR = 3;
     const spiralMediumWidth = 810;
     const spiralMediumHeight = 720;
     const worldIconsMediumWidth = 85;
@@ -63,6 +62,12 @@ function DebugWorldAreaBoarders() {
 // const debugBoarderButton = document.getElementById('debug-boarder-button');
 // debugBoarderButton!.onclick = DebugWorldAreaBoarders;
 startRound(getRandomImagePath());
-container.onmouseenter = setMapSizeMedium;
-container.onmouseleave = setMapSizeSmall;
+container.onmouseenter = () => {
+    setMapSizeMedium();
+    restoreTransform();
+};
+container.onmouseleave = () => {
+    saveAndScaleTransform(1 / SCALE_FACTOR);
+    setMapSizeSmall();
+};
 //# sourceMappingURL=App.js.map

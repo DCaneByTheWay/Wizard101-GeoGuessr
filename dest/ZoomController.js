@@ -166,6 +166,24 @@ function applyTransform() {
         inner.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
     }
 }
+let savedScale = 1.0;
+let savedTX = 0;
+let savedTY = 0;
+export function saveAndScaleTransform(sizeRatio) {
+    savedScale = currentScale;
+    savedTX = translateX;
+    savedTY = translateY;
+    // Scale translate proportionally to the new container size
+    translateX *= sizeRatio;
+    translateY *= sizeRatio;
+    applyTransform();
+}
+export function restoreTransform() {
+    currentScale = savedScale;
+    translateX = savedTX;
+    translateY = savedTY;
+    applyTransform();
+}
 function zoomIn(container, worlds) {
     if (currentLevel === ZoomLevel.SPIRAL && hoveredElement) {
         const worldClass = hoveredElement.dataset.world;

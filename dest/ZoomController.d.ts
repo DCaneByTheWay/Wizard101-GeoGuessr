@@ -5,6 +5,8 @@ export declare enum ZoomLevel {
     AREA = 2
 }
 export declare function init(container: HTMLElement, worlds: World[]): void;
+export declare function saveAndScaleTransform(sizeRatio: number): void;
+export declare function restoreTransform(): void;
 export declare function getCurrentLevel(): ZoomLevel;
 export declare function getTransform(): {
     scale: number;
