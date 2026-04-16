@@ -29,11 +29,19 @@ const images = [
 ]
 
 const imageElement = document.getElementById("guess-image") as HTMLImageElement;
+const imageWrapper = imageElement?.parentElement;
 // disable drag on spiral and children
-imageElement!.ondragstart = () => false
+imageElement!.ondragstart = () => false;
 
 export function setBackgroundImage(src: string): void {
-    if (imageElement) imageElement.src = src
+    if (imageElement) {
+        imageWrapper?.classList.add("spinner-container");
+        imageWrapper?.classList.remove("loaded");
+        imageElement.onload = () => {
+            imageWrapper?.classList.add("loaded");
+        }
+        imageElement.src = src;
+    }
 }
 
 export function startRound(imgSrc: string): void {

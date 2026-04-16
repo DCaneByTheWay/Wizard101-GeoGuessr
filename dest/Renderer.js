@@ -46,14 +46,34 @@ export function render(container, zoomlevel, worlds, currentWorld, currentArea) 
     const inner = document.createElement("div");
     inner.id = "spiral-content";
     container.appendChild(inner);
+    container.classList.add("spinner-container");
+    container.classList.remove("loaded");
+    const onMainImageLoad = () => {
+        container.classList.add("loaded");
+    };
     if (zoomlevel === 0) {
         renderSpiral(inner, worlds);
+        const img = inner.querySelector("#SpiralImage");
+        if (img?.complete)
+            onMainImageLoad();
+        else
+            img?.addEventListener("load", onMainImageLoad);
     }
     else if (zoomlevel === 1 && currentWorld) {
         renderWorldMap(inner, currentWorld);
+        const img = inner.querySelector("#WorldMapImage");
+        if (img?.complete)
+            onMainImageLoad();
+        else
+            img?.addEventListener("load", onMainImageLoad);
     }
     else if (zoomlevel === 2 && currentArea) {
         renderArea(inner, currentArea);
+        const img = inner.querySelector("#AreaImage");
+        if (img?.complete)
+            onMainImageLoad();
+        else
+            img?.addEventListener("load", onMainImageLoad);
     }
 }
 //# sourceMappingURL=Renderer.js.map

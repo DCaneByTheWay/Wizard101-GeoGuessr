@@ -28,11 +28,18 @@ const images = [
     "Dragonspyre7"
 ];
 const imageElement = document.getElementById("guess-image");
+const imageWrapper = imageElement?.parentElement;
 // disable drag on spiral and children
 imageElement.ondragstart = () => false;
 export function setBackgroundImage(src) {
-    if (imageElement)
+    if (imageElement) {
+        imageWrapper?.classList.add("spinner-container");
+        imageWrapper?.classList.remove("loaded");
+        imageElement.onload = () => {
+            imageWrapper?.classList.add("loaded");
+        };
         imageElement.src = src;
+    }
 }
 export function startRound(imgSrc) {
     setBackgroundImage(imgSrc);
