@@ -1,6 +1,7 @@
 import { init } from "./ZoomController.js";
 import { worlds } from "./WorldData.js";
 import { render } from "./Renderer.js";
+import { getRandomImagePath, startRound } from "./GameController.js";
 
 const container = document.getElementById("Spiral");
 
@@ -67,16 +68,18 @@ function setMapSizeSmall(): void {
 
 /** Function to be used to debug boarders */
 function DebugWorldAreaBoarders(): void {
-  const debugWorldName = "Krokotopia" // change string to world name to debug
+  const debugWorldName = "Dragonspyre" // change string to world name to debug
   const debugWorld = worlds.find(world => world.name === debugWorldName);
 
   setMapSize(MAP_SIZES.MEDIUM);
   render(container!, 1, worlds, debugWorld!, null);
 }
 
-//DebugWorldAreaBoarders();
-//const debugBoarderButton = document.getElementById('debug-boarder-button');
-//debugBoarderButton!.onclick = DebugWorldAreaBoarders;
+// DebugWorldAreaBoarders();
+// const debugBoarderButton = document.getElementById('debug-boarder-button');
+// debugBoarderButton!.onclick = DebugWorldAreaBoarders;
+
+startRound(getRandomImagePath());
 
 container!.onmouseenter = setMapSizeMedium;
 container!.onmouseleave = setMapSizeSmall;

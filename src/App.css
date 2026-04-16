@@ -21,6 +21,16 @@ body {
     text-align: center;
 }
 
+#guess-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: contain;   /* or 'cover' to fill with cropping */
+    z-index: 0;
+}
+
 #Spiral {
     padding: 10px;
     border-radius: 50px;
@@ -58,7 +68,6 @@ body {
 }
 
 .area-hotspot {
-
     user-select: none;
     position: absolute;
     cursor: pointer;
