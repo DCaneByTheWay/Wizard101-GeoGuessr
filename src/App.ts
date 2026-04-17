@@ -3,12 +3,13 @@ import { worlds } from "./WorldData.js";
 import { render } from "./Renderer.js";
 import { getRandomImagePath, startRound } from "./GameController.js";
 
-const container = document.getElementById("Spiral");
+const spiral = document.getElementById("Spiral");
+const container = document.getElementById("Wizard101GeoGuessrMap");
 
 // disable drag on spiral and children
-container!.ondragstart = () => false
+spiral!.ondragstart = () => false
 
-init(container!, worlds);
+init(spiral!, worlds);
 
 enum MAP_SIZES {
   SMALL = 1,
@@ -71,7 +72,7 @@ function DebugWorldAreaBoarders(): void {
   const debugWorld = worlds.find(world => world.name === debugWorldName);
 
   setMapSize(MAP_SIZES.MEDIUM);
-  render(container!, 1, worlds, debugWorld!, null);
+  render(spiral!, 1, worlds, debugWorld!, null);
 }
 
 // DebugWorldAreaBoarders();

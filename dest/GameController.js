@@ -40,8 +40,9 @@ const DRAG_THRESHOLD = 5; // pixels of drag
 container.addEventListener("pointerdown", (e) => {
     pointerDownPos = { x: e.clientX, y: e.clientY };
 });
-const MARKER_SRC = "./Images/Icons/(Icon)_Hat.png";
+const MARKER_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
 let savedMarker = null;
+const submitAnswerButton = document.getElementById("submit-guess-button");
 export function setBackgroundImage(src) {
     if (imageElement) {
         imageWrapper?.classList.add("spinner-container");
@@ -100,6 +101,9 @@ export function placeMarker(e) {
         spiralContent.appendChild(marker);
         // update last mark
         savedMarker = { key: getLevelKey(), xPercent, yPercent };
+        // update submit button text
+        submitAnswerButton.textContent = "Submit your Guess!";
+        submitAnswerButton.style.backgroundColor = 'rgb(30, 2, 90)';
     }
 }
 export function saveMarker() {
