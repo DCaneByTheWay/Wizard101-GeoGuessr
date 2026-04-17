@@ -1,5 +1,6 @@
 import { World, Area } from "./WorldData.js";
 import { render } from "./Renderer.js";
+import { saveMarker, restoreMarker } from "./GameController.js";
 
 export enum ZoomLevel {
     SPIRAL = 0,
@@ -101,6 +102,8 @@ export function init(container: HTMLElement, worlds: World[]): void {
             dragStartTX = translateX;
             dragStartTY = translateY;
             container.style.cursor = "grabbing";
+            const inner = document.getElementById("spiral-content");
+            if (inner) inner.style.transition = "none";
         }
     });
 
@@ -125,6 +128,8 @@ export function init(container: HTMLElement, worlds: World[]): void {
         if (isDragging) {
             isDragging = false;
             container.style.cursor = "";
+            const inner = document.getElementById("spiral-content");
+            if (inner) inner.style.transition = "";
         }
     });
 
@@ -183,6 +188,11 @@ function applyTransform(): void {
     if (inner) {
         inner.style.transformOrigin = "0 0";
         inner.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+
+        const marker = inner.querySelector(".marker") as HTMLElement | null;
+        if (marker) {
+            marker.style.transform = `translate(-50%, -50%) scale(${1 / currentScale})`;
+        }
     }
 }
 
@@ -210,18 +220,24 @@ export function restoreTransform(): void {
 function zoomIn(container: HTMLElement, worlds: World[]): boolean {
     if (currentLevel === ZoomLevel.SPIRAL && hoveredElement) {
         const worldClass = hoveredElement.dataset.world;
-        currentWorld = worlds.find(w => w.class === worldClass) ?? null;
-        if (currentWorld) {
+        const world = worlds.find(w => w.class === worldClass) ?? null;
+        if (world) {
+            saveMarker();
+            currentWorld = world;
             currentLevel = ZoomLevel.WORLD;
             render(container, currentLevel, worlds, currentWorld, currentArea);
+            restoreMarker();
             return true;
         }
     } else if (currentLevel === ZoomLevel.WORLD && hoveredElement && currentWorld) {
         const areaName = hoveredElement.dataset.area;
-        currentArea = currentWorld.areas.find(a => a.name === areaName) ?? null;
-        if (currentArea) {
+        const area = currentWorld.areas.find(a => a.name === areaName) ?? null;
+        if (area) {
+            saveMarker();
+            currentArea = area;
             currentLevel = ZoomLevel.AREA;
             render(container, currentLevel, worlds, currentWorld, currentArea);
+            restoreMarker();
             return true;
         }
     }
@@ -231,14 +247,18 @@ function zoomIn(container: HTMLElement, worlds: World[]): boolean {
 
 function zoomOut(container: HTMLElement, worlds: World[]): boolean {
     if (currentLevel === ZoomLevel.AREA) {
+        saveMarker();
         currentLevel = ZoomLevel.WORLD;
         currentArea = null;
         render(container, currentLevel, worlds, currentWorld, currentArea);
+        restoreMarker();
         return true;
     } else if (currentLevel === ZoomLevel.WORLD) {
+        saveMarker();
         currentLevel = ZoomLevel.SPIRAL;
         currentWorld = null;
         render(container, currentLevel, worlds, currentWorld, currentArea);
+        restoreMarker();
         return true;
     }
 
@@ -247,6 +267,16 @@ function zoomOut(container: HTMLElement, worlds: World[]): boolean {
 
 export function getCurrentLevel(): ZoomLevel {
     return currentLevel
+}
+
+export function getLevelKey(): string {
+    if (currentLevel === ZoomLevel.WORLD && currentWorld) {
+        return `world:${currentWorld.class}`;
+    }
+    if (currentLevel === ZoomLevel.AREA && currentWorld && currentArea) {
+        return `area:${currentWorld.class}:${currentArea.name}`;
+    }
+    return "spiral";
 }
 
 export function getTransform(): { scale: number; tx: number; ty: number } {
