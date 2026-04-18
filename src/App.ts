@@ -1,10 +1,11 @@
 import { init, saveAndScaleTransform, restoreTransform } from "./ZoomController.js";
 import { worlds } from "./WorldData.js";
 import { render } from "./Renderer.js";
-import { getRandomImagePath, startRound } from "./GameController.js";
+import { getRandomImagePath, startRound, submitGuess } from "./GameController.js";
 
 const spiral = document.getElementById("Spiral");
 const container = document.getElementById("Wizard101GeoGuessrMap");
+const submitButton = document.getElementById("submit-guess-button");
 
 // disable drag on spiral and children
 spiral!.ondragstart = () => false
@@ -89,3 +90,4 @@ container!.onmouseleave = () => {
   saveAndScaleTransform(1 / SCALE_FACTOR);
   setMapSizeSmall();
 };
+submitButton!.onclick = submitGuess;

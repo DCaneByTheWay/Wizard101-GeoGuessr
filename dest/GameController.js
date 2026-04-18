@@ -1,4 +1,5 @@
 import { getLevelKey, getTransform } from "./ZoomController.js";
+import { guessImages } from "./ImageData.js";
 const images = [
     "WizardCity1",
     "WizardCity2",
@@ -41,7 +42,8 @@ container.addEventListener("pointerdown", (e) => {
     pointerDownPos = { x: e.clientX, y: e.clientY };
 });
 const MARKER_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
-let savedMarker = null;
+const ANSWER_MARKER_SRC = "./Images/Markers/(Icon)_Quests.png";
+let currentMarker = null;
 const submitAnswerButton = document.getElementById("submit-guess-button");
 export function setBackgroundImage(src) {
     if (imageElement) {
@@ -57,9 +59,77 @@ export function startRound(imgSrc) {
     setBackgroundImage(imgSrc);
     // TODO: add actual game logic
 }
+export function submitGuess() {
+    // return early if no marker placed yet
+    if (!currentMarker)
+        return;
+    console.log("submitted!");
+    const answerMark = { key: '', xPercent: 0.5, yPercent: 0.5 };
+    const score = getCalculatedScore(currentMarker, answerMark);
+}
+export function getCalculatedScore(guessMark, answerMark) {
+    /*
+    Scoring System:
+    out of 100%
+    Correct World:    <= 10%
+    Correct Area:     <= 15%
+    Correct Distance: >= 75%
+
+
+    Guess at spiral level:
+    (World only guess)
+    MAX score: 10% score
+
+    Guess at world level:
+    (World and Area only guess)
+    Deciding between 2 options:
+    1)
+    Marker is put at pos 50%, 50% at area level
+    MAX score: 10% + 15% + (50/50 area guess)% = ?% score
+    2)
+    Marker is calculated at 50% away from answer marker
+    MAX score: 10% + 15% + (50/50 area guess)% = ?% score
+
+    Guess at area level:
+    (World, Area, and distance guess)
+    MAX score: 10% + 15% + 75% = 100% score
+
+
+
+
+
+
+
+
+
+    Casey Wizard101 GeoGuessr Score calculation derived from Actual Geoguessr calculation into python:
+
+    # max score of 100% (can be scaled up to any value)
+
+    import math
+    isAreaCorrect = True
+    isWorldCorrect = True if isAreaCorrect else False
+
+    worldScore = 10 if isWorldCorrect else 0
+    areaScore = 15 if isAreaCorrect else 0
+    distance = 10
+
+    maxDistanceScore = 75
+    mapSize = 100 # MAPSIZE NEEDS TO BE ADJUSTED PER EACH MAP!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    score = worldScore + areaScore + maxDistanceScore*math.e**(-6.7 * distance/mapSize)
+    print(score)
+
+    */
+    return 1;
+}
 export function getRandomImagePath() {
-    const randomImg = images[Math.floor(Math.random() * images.length)];
-    return `Images/GuessImages/${randomImg}.png`;
+    //const wizCityImageList = Object.values(guessImages).flat().filter(img => img.difficulty === Difficulty.EASY);
+    const worldName = "Dragonspyre";
+    const iamgeList = Object.values(guessImages).flat().filter(img => img.imgSrc.includes(worldName));
+    const imgSrc = iamgeList[Math.floor(Math.random() * iamgeList.length)]?.imgSrc;
+    console.log(`current img: ${imgSrc}`);
+    return imgSrc;
 }
 export function placeMarker(e) {
     // return early if dragging map
@@ -99,31 +169,33 @@ export function placeMarker(e) {
         marker.style.left = xPercent + "%";
         marker.style.top = yPercent + "%";
         spiralContent.appendChild(marker);
-        // update last mark
-        savedMarker = { key: getLevelKey(), xPercent, yPercent };
+        // update current mark
+        currentMarker = { key: getLevelKey(), xPercent, yPercent };
         // update submit button text
         submitAnswerButton.textContent = "Submit your Guess!";
         submitAnswerButton.style.backgroundColor = 'rgb(30, 2, 90)';
     }
+    console.log(`x:${xPercent.toFixed(1)}\ny:${yPercent.toFixed(1)}`);
 }
 export function saveMarker() {
     const spiralContent = document.getElementById("spiral-content");
     const markerElement = spiralContent?.querySelector(".marker");
     if (markerElement) {
-        savedMarker = {
+        currentMarker = {
             key: getLevelKey(),
             xPercent: parseFloat(markerElement.style.left),
             yPercent: parseFloat(markerElement.style.top)
         };
+        console.log(currentMarker.key);
     }
 }
 export function restoreMarker() {
     const spiralContent = document.getElementById("spiral-content");
     // return if a marker has not been placed yet
-    if (!spiralContent || !savedMarker)
+    if (!spiralContent || !currentMarker)
         return;
     // return if marker belongs to a different map level
-    if (savedMarker.key !== getLevelKey())
+    if (currentMarker.key !== getLevelKey())
         return;
     const { scale } = getTransform();
     const marker = document.createElement("img");
@@ -135,8 +207,8 @@ export function restoreMarker() {
     marker.style.height = markerSize + "px";
     // center on click, counter-scale to stay fixed size
     marker.style.transform = `translate(-50%, -50%) scale(${1 / scale})`;
-    marker.style.left = savedMarker.xPercent + "%";
-    marker.style.top = savedMarker.yPercent + "%";
+    marker.style.left = currentMarker.xPercent + "%";
+    marker.style.top = currentMarker.yPercent + "%";
     spiralContent.appendChild(marker);
 }
 //# sourceMappingURL=GameController.js.map

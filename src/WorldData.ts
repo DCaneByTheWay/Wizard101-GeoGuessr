@@ -70,9 +70,9 @@ export const worlds: World [] = [
             { name: "Chelsea Court",       imageSrc: "./Images/Maps/Marleybone/ChelseaCourt.png",       top: "16%", left: "20%", width: "13%", height: "9%"  },
             { name: "Digmoore Station",    imageSrc: "./Images/Maps/Marleybone/DigmooreStation.png",    top: "31%", left: "16%", width: "21%", height: "10%" },
             { name: "Hyde Park",           imageSrc: "./Images/Maps/Marleybone/HydePark.png",           top: "18%", left: "34%", width: "9%",  height: "9%"  },
-            { name: "Knight's Court",      imageSrc: "./Images/Maps/Marleybone/KnightsCourt.png",       top: "18%", left: "80%", width: "13%", height: "9%"  },
+            { name: "Knights Court",       imageSrc: "./Images/Maps/Marleybone/KnightsCourt.png",       top: "18%", left: "80%", width: "13%", height: "9%"  },
             { name: "Newgate Prison",      imageSrc: "./Images/Maps/Marleybone/NewgatePrison.png",      top: "18%", left: "63%", width: "14%", height: "9%"  },
-            { name: "Regents Square",     imageSrc: "./Images/Maps/Marleybone/RegentsSquare.png",       top: "40%", left: "45%", width: "17%", height: "10%" },
+            { name: "Regents Square",      imageSrc: "./Images/Maps/Marleybone/RegentsSquare.png",      top: "40%", left: "45%", width: "17%", height: "10%" },
             { name: "Royal Museum",        imageSrc: "./Images/Maps/Marleybone/RoyalMuseum.png",        top: "59%", left: "44%", width: "18%", height: "10%" },
             { name: "Scotland Yard Roof",  imageSrc: "./Images/Maps/Marleybone/ScotlandYardRoof.png",   top: "31%", left: "67%", width: "24%", height: "10%" },
         ]
