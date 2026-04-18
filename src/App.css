@@ -138,3 +138,24 @@ body {
     transition: 0.1s ease-out;
     display: inline-block;
 }
+
+.score-text{
+    position: fixed; 
+    z-index: 9999;         
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#score-display {
+    margin-top: 20%;
+    margin-bottom: 10%;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#score-breakdown {
+    font-size: 16px;
+    font-weight: bold;
+}
