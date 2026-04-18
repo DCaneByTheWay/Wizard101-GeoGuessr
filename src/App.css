@@ -139,6 +139,7 @@ body {
     display: inline-block;
 }
 
+/* TODO: fix div so it doesnt block mouse hover on map */
 .score-text{
     position: fixed; 
     z-index: 9999;         

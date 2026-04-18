@@ -1,5 +1,6 @@
 import { getLevelKey, getTransform } from "./ZoomController.js";
 import { guessImages } from "./ImageData.js";
+import { worlds } from "./WorldData.js";
 const images = [
     "WizardCity1",
     "WizardCity2",
@@ -47,7 +48,7 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
     }
 });
-const MARKER_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
+const MARKER_SRC = "./Images/Markers/(Icon)_Shadow.png";
 const ANSWER_MARKER_SRC = "./Images/Markers/(Icon)_Quests.png";
 let currentMarker = null;
 const submitAnswerButton = document.getElementById("submit-guess-button");
@@ -77,6 +78,7 @@ export function startRound(imgSrc) {
     setBackgroundImage(imgSrc);
     // TODO: add actual game logic
 }
+/** Submits location of current marker */
 export function submitGuess() {
     // return early if no marker placed yet
     if (!currentMarker)
@@ -84,8 +86,8 @@ export function submitGuess() {
     console.log("submitted!");
     const answerMark = currentGuessImage?.solutionMarker;
     const score = getCalculatedScore(currentMarker, answerMark);
-    console.log(`your score: ${score.toFixed(0)}/${MAX_SCORE}`);
     scoreDisplay.textContent = `You Scored ${score.toFixed(0).toString()}/${MAX_SCORE}!`;
+    console.log(`current hovered area: ${getHoveredArea(currentMarker)?.name}`);
     //scoreBreakdown!.textContent = `Correct World: `; //TODO: make breakdown
 }
 /** Takes two marks and returns distance */
@@ -95,7 +97,69 @@ function getMarkDistance(mark1, mark2) {
     const distance = Math.sqrt(dx * dx + dy * dy);
     return distance;
 }
+/** Takes mark and returns area it is hovering (if mark is in world level) */
+function getHoveredArea(mark) {
+    // if mark is in spiral level
+    if (mark.key === "spiral") {
+        // TODO: return world icon that the mark is hovering, or create new function to do this
+    }
+    // if mark is in world level
+    else if (mark.key.includes("world")) {
+        const worldClass = mark.key.replace("world:", ""); // world:wizard-city
+        // get world
+        const world = worlds.find(w => w.class === worldClass);
+        // return early if there is no world of that class
+        if (!world)
+            return null;
+        // iterate through areas
+        for (const area of world.areas) {
+            // get area info
+            const areaLeft = parseFloat(area.left);
+            const areaTop = parseFloat(area.top);
+            const areaWidth = parseFloat(area.width);
+            const areaHeight = parseFloat(area.height);
+            // return area if mark pos is within area region
+            if (mark.xPercent >= areaLeft && mark.xPercent <= areaLeft + areaWidth &&
+                mark.yPercent >= areaTop && mark.yPercent <= areaTop + areaHeight) {
+                return area;
+            }
+        }
+    }
+    // if mark is in area level
+    else if (mark.key.includes("area")) {
+        // not implemented, not needed (i think)
+    }
+    // return null if mark is in no area
+    return null;
+}
+/** Takes distance and returns score calculation with constant values */
+function getDistanceScoreCalculation(distance) {
+    // derived from actual geoguessr score calculation
+    return WORLD_SCORE + AREA_SCORE + MAXIMUM_DISTANCE_SCORE * Math.E ** (-6.7 * distance / currentGuessImage?.mapSize);
+}
+/** Takes guessMark and answerMark, and returns score for the round */
 export function getCalculatedScore(guessMark, answerMark) {
+    /*
+    Scoring System:
+    (out of 100%)
+    Correct World:    <= 10%
+    Correct Area:     <= 15%
+    Correct Distance: >= 75%
+
+
+    Guess at spiral level:
+    (World only guess)
+    MAX score: 10% score
+
+    Guess at world level:
+    (World and Area only guess)
+    Marker is calculated at 50% distance away from answer marker
+    MAX score: 10% + 15% + (50% distance value)% = ?% score
+
+    Guess at area level:
+    (World, Area, and distance guess)
+    MAX score: 10% + 15% + 75% = 100% score
+    */
     let score = 0;
     // if guess marker is at spiral level
     if (guessMark.key === "spiral") {
@@ -103,8 +167,25 @@ export function getCalculatedScore(guessMark, answerMark) {
     }
     // if guess marker is at world level
     else if (guessMark.key.includes("world")) {
-        // TODO: finish deciding how to calculate score at this level
-        // prob either place marker 50% away from answer marker, or place marker in center of area to calculate distance
+        // get world from guess mark
+        const guessedWorld = guessMark.key.replace("world:", ""); // world:wizard-city
+        // if guessed world in answer mark key
+        // EX: 'marleybone' in 'area:marleybone:Royal Museum'
+        if (answerMark.key.includes(guessedWorld)) {
+            // add world score if world is correct
+            score += WORLD_SCORE;
+        }
+        // add area score if area hotspot hovered is correct
+        const hoveredArea = getHoveredArea(guessMark);
+        // if there is an area hovered
+        if (hoveredArea) {
+            // if hovered area is in answer mark key
+            if (answerMark.key.includes(hoveredArea.name)) {
+                // add score from 50% distance
+                const distance = 50;
+                score += getDistanceScoreCalculation(distance);
+            }
+        }
     }
     // if guess marker is at area level
     else if (guessMark.key.includes("area")) {
@@ -126,80 +207,18 @@ export function getCalculatedScore(guessMark, answerMark) {
         else if (guessArea === answerArea) {
             console.log('correct world, correct area');
             const distance = getMarkDistance(guessMark, answerMark);
-            score = WORLD_SCORE + AREA_SCORE + MAXIMUM_DISTANCE_SCORE * Math.E ** (-6.7 * distance / currentGuessImage?.mapSize);
-        }
-        else {
-            console.log('how did we get here');
-            console.log(`guess: ${guessMark.key}, answer: ${guessMark.key}`);
+            score = getDistanceScoreCalculation(distance);
         }
         const distance = getMarkDistance(guessMark, answerMark);
         console.log(`guess: ${guessMark.xPercent.toFixed(1)}, ${guessMark.yPercent.toFixed(1)}`);
         console.log(`answer: ${answerMark.xPercent.toFixed(1)}, ${answerMark.yPercent.toFixed(1)}`);
         console.log(`distance from answer: ${distance.toFixed(1)}`);
-        console.log(`score: ${score}`);
     }
-    else {
-        console.log('how did we get here');
-        console.log(`key: ${guessMark.key}`);
-    }
-    /*
-    Scoring System:
-    out of 100%
-    Correct World:    <= 10%
-    Correct Area:     <= 15%
-    Correct Distance: >= 75%
-
-
-    Guess at spiral level:
-    (World only guess)
-    MAX score: 10% score
-
-    Guess at world level:
-    (World and Area only guess)
-    Deciding between 2 options:
-    1)
-    Marker is put at pos 50%, 50% at area level
-    MAX score: 10% + 15% + (50/50 area guess)% = ?% score
-    2)
-    Marker is calculated at 50% away from answer marker
-    MAX score: 10% + 15% + (50/50 area guess)% = ?% score
-
-    Guess at area level:
-    (World, Area, and distance guess)
-    MAX score: 10% + 15% + 75% = 100% score
-
-
-
-
-
-
-
-
-
-    Casey Wizard101 GeoGuessr Score calculation derived from Actual Geoguessr calculation into python:
-
-    # max score of 100% (can be scaled up to any value)
-
-    import math
-    isAreaCorrect = True
-    isWorldCorrect = True if isAreaCorrect else False
-
-    worldScore = 10 if isWorldCorrect else 0
-    areaScore = 15 if isAreaCorrect else 0
-    distance = 10
-
-    maxDistanceScore = 75
-    mapSize = 100 # MAPSIZE NEEDS TO BE ADJUSTED PER EACH MAP!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    score = worldScore + areaScore + maxDistanceScore*math.e**(-6.7 * distance/mapSize)
-    print(score)
-
-    */
     return score;
 }
 export function getRandomImagePath() {
     //const worldName = "Dragonspyre";
-    //const imageList = Object.values(guessImages).flat().filter(img => img.imgSrc.includes(worldName));
+    //const imageList = Object.values(guessImages).flat().filter(img => img.imgSrc.includes('Dragonspyre'));
     const imageList = Object.values(guessImages).flat();
     const randomGuessImage = imageList[Math.floor(Math.random() * imageList.length)];
     const imgSrc = randomGuessImage.imgSrc;
@@ -207,6 +226,7 @@ export function getRandomImagePath() {
     currentGuessImage = randomGuessImage;
     return imgSrc;
 }
+/** Places new mark or replaces existing mark */
 export function placeMarker(e) {
     // return early if dragging map
     if (pointerDownPos) {
@@ -253,6 +273,7 @@ export function placeMarker(e) {
     currentMarker = { key: getLevelKey(), xPercent, yPercent };
     console.log(`x:${xPercent.toFixed(1)}\ny:${yPercent.toFixed(1)}`);
 }
+/** Preserves mark through level changes (spiral/world/area) */
 export function saveMarker() {
     const spiralContent = document.getElementById("spiral-content");
     const markerElement = spiralContent?.querySelector(".marker");
@@ -262,9 +283,10 @@ export function saveMarker() {
             xPercent: parseFloat(markerElement.style.left),
             yPercent: parseFloat(markerElement.style.top)
         };
-        console.log(currentMarker.key);
+        //console.log(currentMarker.key);
     }
 }
+/** Replaces existing mark when level with existing mark is loaded */
 export function restoreMarker() {
     const spiralContent = document.getElementById("spiral-content");
     // return if a marker has not been placed yet
