@@ -48,7 +48,7 @@ export const guessImages: Record<string, GuessImage[]> = {
     ],
     "dragonspyre": [
         {imgSrc: "Images/GuessImages/Dragonspyre1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: {key: "area:dragonspyre:The Basilica", xPercent: 61.3, yPercent: 42.5}},
-        {imgSrc: "Images/GuessImages/Dragonspyre2.png", difficulty: Difficulty.HARD, mapSize: 100, solutionMarker: {key: "area:dragonspyre:Dragonspyre Academy", xPercent: 74.5, yPercent: 47.5}},
+        {imgSrc: "Images/GuessImages/Dragonspyre2.png", difficulty: Difficulty.HARD, mapSize: 100, solutionMarker: {key: "area:dragonspyre:The Necropolis", xPercent: 74.5, yPercent: 47.5}},
         {imgSrc: "Images/GuessImages/Dragonspyre3.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: {key: "area:dragonspyre:The Atheneum", xPercent: 37.4, yPercent: 47.1}},
         {imgSrc: "Images/GuessImages/Dragonspyre4.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: {key: "area:dragonspyre:The Grand Chasm", xPercent: 48.8, yPercent: 56.7}},
         {imgSrc: "Images/GuessImages/Dragonspyre5.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: {key: "area:dragonspyre:Dragons Roost", xPercent: 43.8, yPercent: 42.8}},
