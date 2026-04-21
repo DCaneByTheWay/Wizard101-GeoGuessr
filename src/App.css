@@ -139,7 +139,6 @@ body {
     display: inline-block;
 }
 
-/* TODO: fix div so it doesnt block mouse hover on map */
 .round-finalization{
     position: fixed; 
     z-index: 9999;         
@@ -147,18 +146,29 @@ body {
     transform: translateX(-50%);
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    pointer-events: none;
 }
 
 #score-display {
     margin-top: 20%;
     margin-bottom: 10%;
-    font-size: 50px;
+    font-size: 52px;
     font-weight: bold;
+    text-shadow:
+    -2px -2px 0 black,
+     2px -2px 0 black,
+    -2px  2px 0 black,
+     2px  2px 0 black;
 }
 
 #score-breakdown {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
+    text-shadow:
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black;
 }
 
 #next-round-button {
@@ -173,4 +183,5 @@ body {
     width: 270px;
     transition: 0.1s ease-out;
     display: inline-block;
+    pointer-events: all;
 }

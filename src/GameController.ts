@@ -73,7 +73,7 @@ export function startRound(): void {
     submitAnswerButton!.textContent = "Place your Mark!";
     submitAnswerButton!.style.backgroundColor = 'rgb(152, 151, 154)';
 
-    resetToSpiral(container!, worlds); // TODO: Fix this, looks like sometimes zoom is not 100% zoomed out
+    resetToSpiral(container!, worlds);
     const imgSrc = getRandomImagePath();
     setBackgroundImage(imgSrc);
     // TODO: add actual game logic
@@ -100,8 +100,26 @@ export function submitGuess(): void {
 
     scoreDisplay!.textContent = `You Scored ${score.toFixed(0).toString()}/${MAX_SCORE}!`;
     console.log(`current hovered area: ${getHoveredArea(currentMarker)?.name}`)
+    
+    console.log(currentAnswerMarker);
+    console.log(answerMark);
 
-    //scoreBreakdown!.textContent = `Correct World: `; // TODO: make breakdown
+    const [, , guessArea] = currentMarker.key.split(":");
+    const [, answerWorld, answerArea] = answerMark.key.split(":");
+    
+    // TODO: get punkkattv to create a function to convert worldClass to worldName ('wizard-city' -> 'Wizard City')
+    if (guessArea == answerArea) {
+        const distance = getMarkDistance(currentMarker, currentAnswerMarker).toFixed(1)
+        scoreBreakdown!.textContent = `${answerWorld}: ${answerArea} (${distance} units away!)`;
+    }
+    else {
+        scoreBreakdown!.textContent = `${answerWorld}: ${answerArea}`;
+    }
+    /*
+    You Scored 4900/5000!
+    {World}: {Area} (50 units away!)
+
+    */
 
 
 
@@ -370,6 +388,12 @@ function placeAnswerMarker(): void {
     answerMarker.style.top = answerMark.yPercent + "%";
    
     spiralContent!.appendChild(answerMarker);
+
+    restoreMarker(); 
+    // it doesnt REALLY matter, but 
+    // TODO: fix bug where a second guess mark is placed
+    // because i rerender the marks once the answer mark is placed
+    // so the answer mark is rendered underneath the guess mark
 }
 
 /** Preserves mark through level changes (spiral/world/area) */
