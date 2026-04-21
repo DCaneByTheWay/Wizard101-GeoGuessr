@@ -17,7 +17,7 @@ const MIN_SCALE = 1.0;
 const MAX_SCALE = 1.75;
 const ZOOM_SPEED = 0.05;
 let zoomOutTicks = 0;
-const ZOOM_OUT_THRESHOLD = 15;
+const ZOOM_OUT_THRESHOLD = 15; //TODO: implement similar threshhold for zooming in and not just out. slightly lower threshold though.
 export function init(container, worlds) {
     // track what the user is hovering over
     container.addEventListener("mouseover", (e) => {

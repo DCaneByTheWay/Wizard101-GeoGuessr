@@ -57,7 +57,7 @@ export function startRound() {
     // reset submit answer button
     submitAnswerButton.textContent = "Place your Mark!";
     submitAnswerButton.style.backgroundColor = 'rgb(152, 151, 154)';
-    resetToSpiral(container, worlds);
+    resetToSpiral(container, worlds); // TODO: Fix this, looks like sometimes zoom is not 100% zoomed out
     const imgSrc = getRandomImagePath();
     setBackgroundImage(imgSrc);
     // TODO: add actual game logic
@@ -67,15 +67,21 @@ export function submitGuess() {
     // return early if no marker placed yet
     if (!currentMarker)
         return;
+    // return early if guess has been submitted
+    if (hasSubmittedGuess)
+        return;
     console.log("submitted!");
     hasSubmittedGuess = true;
     const answerMark = currentGuessImage?.solutionMarker;
     const score = getCalculatedScore(currentMarker, answerMark);
     roundFinalizationDiv.style.visibility = "visible";
+    // place answer mark on map
     placeAnswerMarker();
+    // store answer mark again, in case we are on an incorrect map
+    currentAnswerMarker = answerMark;
     scoreDisplay.textContent = `You Scored ${score.toFixed(0).toString()}/${MAX_SCORE}!`;
     console.log(`current hovered area: ${getHoveredArea(currentMarker)?.name}`);
-    //scoreBreakdown!.textContent = `Correct World: `; //TODO: make breakdown
+    //scoreBreakdown!.textContent = `Correct World: `; // TODO: make breakdown
 }
 /** Takes two marks and returns distance */
 function getMarkDistance(mark1, mark2) {
@@ -122,11 +128,13 @@ function getHoveredArea(mark) {
 /** Takes distance and returns score calculation with constant values */
 function getDistanceScoreCalculation(distance) {
     // derived from actual geoguessr score calculation
+    // TODO: tweak this to make it better
     return WORLD_SCORE + AREA_SCORE + MAXIMUM_DISTANCE_SCORE * Math.E ** (-6.7 * distance / currentGuessImage?.mapSize);
 }
 /** Takes guessMark and answerMark, and returns score for the round */
 export function getCalculatedScore(guessMark, answerMark) {
     /*
+    // TODO: decide if there is a better distribution
     Scoring System:
     (out of 100%)
     Correct World:    <= 10%
@@ -283,7 +291,6 @@ function placeAnswerMarker() {
     answerMarker.style.left = answerMark.xPercent + "%";
     answerMarker.style.top = answerMark.yPercent + "%";
     spiralContent.appendChild(answerMarker);
-    restoreMarker();
 }
 /** Preserves mark through level changes (spiral/world/area) */
 export function saveMarker() {
