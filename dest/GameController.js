@@ -1,35 +1,6 @@
 import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
 import { guessImages } from "./ImageData.js";
 import { worlds } from "./WorldData.js";
-const images = [
-    "WizardCity1",
-    "WizardCity2",
-    "WizardCity3",
-    "WizardCity4",
-    "WizardCity5",
-    "WizardCity6",
-    "WizardCity7",
-    "Krokotopia1",
-    "Krokotopia2",
-    "Krokotopia3",
-    "Krokotopia4",
-    "Marleybone1",
-    "Marleybone2",
-    "Marleybone3",
-    "Marleybone4",
-    "Marleybone5",
-    "Mooshu1",
-    "Mooshu2",
-    "Mooshu3",
-    "Mooshu4",
-    "Dragonspyre1",
-    "Dragonspyre2",
-    "Dragonspyre3",
-    "Dragonspyre4",
-    "Dragonspyre5",
-    "Dragonspyre6",
-    "Dragonspyre7"
-];
 const markerSize = 30;
 const answerMarkerSize = markerSize * 2;
 const imageElement = document.getElementById("guess-image");
