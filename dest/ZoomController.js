@@ -263,6 +263,12 @@ export function resetToSpiral(container, worlds) {
     currentScale = 1.0;
     translateX = 0;
     translateY = 0;
+    zoomOutTicks = 0;
+    hoveredElement = null;
+    // Clear cached resize transform so mouse-enter cannot restore stale zoom.
+    savedScale = 1.0;
+    savedTX = 0;
+    savedTY = 0;
     render(container, currentLevel, worlds, currentWorld, currentArea);
     applyTransform();
 }
