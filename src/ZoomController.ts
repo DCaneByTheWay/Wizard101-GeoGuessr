@@ -19,8 +19,11 @@ let translateY = 0;
 const MIN_SCALE = 1.0;
 const MAX_SCALE = 1.75;
 const ZOOM_SPEED = 0.05;
+let zoomInTicks = 0;
 let zoomOutTicks = 0;
-const ZOOM_OUT_THRESHOLD = 15; //TODO: implement similar threshhold for zooming in and not just out. slightly lower threshold though.
+let requiresZoomInThreshold = false;
+const ZOOM_IN_THRESHOLD = 5;
+const ZOOM_OUT_THRESHOLD = 15;
 
 export function init(container: HTMLElement, worlds: World[]): void {
     // track what the user is hovering over
@@ -43,19 +46,37 @@ export function init(container: HTMLElement, worlds: World[]): void {
         e.preventDefault();
         const direction = e.deltaY > 0 ? -1 : 1;
         const oldScale = currentScale;
+
+        // After entering a deeper map level, require a few "zoom in" ticks
+        // before the map starts scaling at that new level.
+        if (direction > 0 && currentScale === MIN_SCALE && requiresZoomInThreshold) {
+            zoomOutTicks = 0;
+            zoomInTicks++;
+            if (zoomInTicks < ZOOM_IN_THRESHOLD) {
+                applyTransform();
+                return;
+            }
+            zoomInTicks = 0;
+            requiresZoomInThreshold = false;
+        }
+
         let newScale = currentScale + direction * ZOOM_SPEED;
 
         if (newScale >= MAX_SCALE) {
+            currentScale = MAX_SCALE;
             zoomOutTicks = 0;
+            zoomInTicks = 0;
+
             if (zoomIn(container, worlds)) {
                 currentScale = 1.0;
                 translateX = 0;
                 translateY = 0;
-            } else {
-                currentScale = MAX_SCALE;
+                requiresZoomInThreshold = true;
+            } else if (oldScale < MAX_SCALE) {
                 adjustTranslate(container, oldScale, e);
             }
         } else if (newScale <= MIN_SCALE) {
+            zoomInTicks = 0;
             currentScale = MIN_SCALE;
             zoomOutTicks++;
             if (zoomOutTicks >= ZOOM_OUT_THRESHOLD) {
@@ -79,6 +100,7 @@ export function init(container: HTMLElement, worlds: World[]): void {
                 translateY = 0;
             }
         } else {
+            zoomInTicks = 0;
             zoomOutTicks = 0;
             currentScale = newScale;
             adjustTranslate(container, oldScale, e);
@@ -290,7 +312,9 @@ export function resetToSpiral(container: HTMLElement, worlds: World[]): void {
     currentScale = 1.0;
     translateX = 0;
     translateY = 0;
+    zoomInTicks = 0;
     zoomOutTicks = 0;
+    requiresZoomInThreshold = false;
     hoveredElement = null;
 
     // Clear cached resize transform so mouse-enter cannot restore stale zoom.
