@@ -1,4 +1,4 @@
-import { getLevelKey, getTransform } from "./ZoomController.js";
+import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
 import { Difficulty, guessImages, GuessImage } from "./ImageData.js";
 import { Area, worlds } from "./WorldData.js";
 
@@ -55,14 +55,16 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-const MARKER_SRC = "./Images/Markers/(Icon)_Shadow.png";
+const MARKER_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
 const ANSWER_MARKER_SRC = "./Images/Markers/(Icon)_Quests.png";
 
 let currentMarker: {key: string, xPercent: number, yPercent: number} | null = null;
 
+const roundFinalizationDiv = document.querySelector<HTMLDivElement>(".round-finalization");
 const submitAnswerButton = document.getElementById("submit-guess-button");
 const scoreDisplay = document.getElementById("score-display");
 const scoreBreakdown = document.getElementById("score-breakdown");
+export const nextRoundButton = document.getElementById("next-round-button");
 
 let currentGuessImage: GuessImage | null = null;
 
@@ -89,7 +91,16 @@ export function setBackgroundImage(src: string): void {
     }
 }
 
-export function startRound(imgSrc: string): void {
+export function startRound(): void {
+    roundFinalizationDiv!.style.visibility = "hidden";
+    clearMarkers();
+
+    // reset submit answer button
+    submitAnswerButton!.textContent = "Place your Mark!";
+    submitAnswerButton!.style.backgroundColor = 'rgb(152, 151, 154)';
+
+    resetToSpiral(container!, worlds);
+    const imgSrc = getRandomImagePath();
     setBackgroundImage(imgSrc);
     // TODO: add actual game logic
 }
@@ -103,10 +114,14 @@ export function submitGuess(): void {
     const answerMark = currentGuessImage?.solutionMarker!;
     const score = getCalculatedScore(currentMarker, answerMark);
 
+    roundFinalizationDiv!.style.visibility = "visible";
+
     scoreDisplay!.textContent = `You Scored ${score.toFixed(0).toString()}/${MAX_SCORE}!`;
     console.log(`current hovered area: ${getHoveredArea(currentMarker)?.name}`)
 
     //scoreBreakdown!.textContent = `Correct World: `; //TODO: make breakdown
+
+
 }
 
 /** Takes two marks and returns distance */
@@ -381,4 +396,16 @@ export function restoreMarker(): void {
     marker.style.top = currentMarker.yPercent + "%";
     
     spiralContent!.appendChild(marker);
+}
+
+/** Removes markers from map */
+function clearMarkers(): void {
+    const spiralContent = document.getElementById("spiral-content");
+    if (!spiralContent) return;
+
+    // remove all rendered markers
+    spiralContent.querySelectorAll(".marker").forEach((marker) => marker.remove())
+
+    // clear current guess marker
+    currentMarker = null;
 }

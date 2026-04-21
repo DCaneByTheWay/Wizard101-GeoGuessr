@@ -1,5 +1,6 @@
+export declare const nextRoundButton: HTMLElement | null;
 export declare function setBackgroundImage(src: string): void;
-export declare function startRound(imgSrc: string): void;
+export declare function startRound(): void;
 /** Submits location of current marker */
 export declare function submitGuess(): void;
 /** Takes guessMark and answerMark, and returns score for the round */

@@ -1,7 +1,7 @@
 import { init, saveAndScaleTransform, restoreTransform } from "./ZoomController.js";
 import { worlds } from "./WorldData.js";
 import { render } from "./Renderer.js";
-import { getRandomImagePath, startRound, submitGuess } from "./GameController.js";
+import { getRandomImagePath, startRound, submitGuess, nextRoundButton } from "./GameController.js";
 
 const spiral = document.getElementById("Spiral");
 const container = document.getElementById("Wizard101GeoGuessrMap");
@@ -80,7 +80,7 @@ function DebugWorldAreaBoarders(): void {
 // const debugBoarderButton = document.getElementById('debug-boarder-button');
 // debugBoarderButton!.onclick = DebugWorldAreaBoarders;
 
-startRound(getRandomImagePath());
+startRound();
 
 container!.onmouseenter = () => {
   setMapSizeMedium();
@@ -91,3 +91,5 @@ container!.onmouseleave = () => {
   setMapSizeSmall();
 };
 submitButton!.onclick = submitGuess;
+
+nextRoundButton!.onclick = startRound;

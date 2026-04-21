@@ -14,4 +14,6 @@ export declare function getTransform(): {
     tx: number;
     ty: number;
 };
+/** Resets map to spiral level */
+export declare function resetToSpiral(container: HTMLElement, worlds: World[]): void;
 //# sourceMappingURL=ZoomController.d.ts.map

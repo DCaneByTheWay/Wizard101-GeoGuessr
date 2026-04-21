@@ -282,3 +282,15 @@ export function getLevelKey(): string {
 export function getTransform(): { scale: number; tx: number; ty: number } {
     return { scale: currentScale, tx: translateX, ty: translateY };
 }
+
+/** Resets map to spiral level */
+export function resetToSpiral(container: HTMLElement, worlds: World[]): void {
+    currentLevel = ZoomLevel.SPIRAL;
+    currentWorld = null;
+    currentArea = null;
+    currentScale = 1.0;
+    translateX = 0;
+    translateY = 0;
+    render(container, currentLevel, worlds, currentWorld, currentArea);
+    applyTransform();
+}

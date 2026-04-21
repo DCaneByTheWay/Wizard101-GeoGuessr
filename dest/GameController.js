@@ -1,4 +1,4 @@
-import { getLevelKey, getTransform } from "./ZoomController.js";
+import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
 import { guessImages } from "./ImageData.js";
 import { worlds } from "./WorldData.js";
 const images = [
@@ -48,12 +48,14 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
     }
 });
-const MARKER_SRC = "./Images/Markers/(Icon)_Shadow.png";
+const MARKER_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
 const ANSWER_MARKER_SRC = "./Images/Markers/(Icon)_Quests.png";
 let currentMarker = null;
+const roundFinalizationDiv = document.querySelector(".round-finalization");
 const submitAnswerButton = document.getElementById("submit-guess-button");
 const scoreDisplay = document.getElementById("score-display");
 const scoreBreakdown = document.getElementById("score-breakdown");
+export const nextRoundButton = document.getElementById("next-round-button");
 let currentGuessImage = null;
 // max score for a perfect guess
 const MAX_SCORE = 5000;
@@ -74,7 +76,14 @@ export function setBackgroundImage(src) {
         imageElement.src = src;
     }
 }
-export function startRound(imgSrc) {
+export function startRound() {
+    roundFinalizationDiv.style.visibility = "hidden";
+    clearMarkers();
+    // reset submit answer button
+    submitAnswerButton.textContent = "Place your Mark!";
+    submitAnswerButton.style.backgroundColor = 'rgb(152, 151, 154)';
+    resetToSpiral(container, worlds);
+    const imgSrc = getRandomImagePath();
     setBackgroundImage(imgSrc);
     // TODO: add actual game logic
 }
@@ -86,6 +95,7 @@ export function submitGuess() {
     console.log("submitted!");
     const answerMark = currentGuessImage?.solutionMarker;
     const score = getCalculatedScore(currentMarker, answerMark);
+    roundFinalizationDiv.style.visibility = "visible";
     scoreDisplay.textContent = `You Scored ${score.toFixed(0).toString()}/${MAX_SCORE}!`;
     console.log(`current hovered area: ${getHoveredArea(currentMarker)?.name}`);
     //scoreBreakdown!.textContent = `Correct World: `; //TODO: make breakdown
@@ -308,5 +318,15 @@ export function restoreMarker() {
     marker.style.left = currentMarker.xPercent + "%";
     marker.style.top = currentMarker.yPercent + "%";
     spiralContent.appendChild(marker);
+}
+/** Removes markers from map */
+function clearMarkers() {
+    const spiralContent = document.getElementById("spiral-content");
+    if (!spiralContent)
+        return;
+    // remove all rendered markers
+    spiralContent.querySelectorAll(".marker").forEach((marker) => marker.remove());
+    // clear current guess marker
+    currentMarker = null;
 }
 //# sourceMappingURL=GameController.js.map
