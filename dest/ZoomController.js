@@ -171,10 +171,9 @@ function applyTransform() {
     if (inner) {
         inner.style.transformOrigin = "0 0";
         inner.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
-        const marker = inner.querySelector(".marker");
-        if (marker) {
+        inner.querySelectorAll(".marker, .answer-marker").forEach((marker) => {
             marker.style.transform = `translate(-50%, -50%) scale(${1 / currentScale})`;
-        }
+        });
     }
 }
 let savedScale = 1.0;

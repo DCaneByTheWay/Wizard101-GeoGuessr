@@ -33,6 +33,7 @@ const images = [
 ]
 
 const markerSize = 30;
+const answerMarkerSize = markerSize*2;
 const imageElement = document.getElementById("guess-image") as HTMLImageElement;
 const imageWrapper = imageElement?.parentElement;
 // disable drag on spiral and children
@@ -59,6 +60,8 @@ const MARKER_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
 const ANSWER_MARKER_SRC = "./Images/Markers/(Icon)_Quests.png";
 
 let currentMarker: {key: string, xPercent: number, yPercent: number} | null = null;
+let currentAnswerMarker: {key: string, xPercent: number, yPercent: number} | null = null;
+let hasSubmittedGuess = false;
 
 const roundFinalizationDiv = document.querySelector<HTMLDivElement>(".round-finalization");
 const submitAnswerButton = document.getElementById("submit-guess-button");
@@ -92,6 +95,7 @@ export function setBackgroundImage(src: string): void {
 }
 
 export function startRound(): void {
+    hasSubmittedGuess = false;
     roundFinalizationDiv!.style.visibility = "hidden";
     clearMarkers();
 
@@ -111,15 +115,19 @@ export function submitGuess(): void {
     if (!currentMarker) return
 
     console.log("submitted!");
+    hasSubmittedGuess = true;
     const answerMark = currentGuessImage?.solutionMarker!;
     const score = getCalculatedScore(currentMarker, answerMark);
 
     roundFinalizationDiv!.style.visibility = "visible";
 
+    placeAnswerMarker();
     scoreDisplay!.textContent = `You Scored ${score.toFixed(0).toString()}/${MAX_SCORE}!`;
     console.log(`current hovered area: ${getHoveredArea(currentMarker)?.name}`)
 
     //scoreBreakdown!.textContent = `Correct World: `; //TODO: make breakdown
+
+
 
 
 }
@@ -299,6 +307,9 @@ export function getRandomImagePath(): string {
 /** Places new mark or replaces existing mark */
 export function placeMarker(e: PointerEvent): void {
     
+    // return early if guess has already been submitted
+    if (hasSubmittedGuess) return;
+
     // return early if dragging map
     if (pointerDownPos) {
         const dx = e.clientX - pointerDownPos.x;
@@ -312,6 +323,7 @@ export function placeMarker(e: PointerEvent): void {
     // return early if map is not rendered yet
     const spiralContent = document.getElementById("spiral-content");
     if (!spiralContent) return;
+
 
     const markerElement = spiralContent.querySelector(".marker");
 
@@ -356,18 +368,56 @@ export function placeMarker(e: PointerEvent): void {
     console.log(`x:${xPercent.toFixed(1)}\ny:${yPercent.toFixed(1)}`);
 }
 
+function placeAnswerMarker(): void {
+    // return early if map is not rendered yet
+    const spiralContent = document.getElementById("spiral-content");
+    if (!spiralContent || !currentGuessImage) return;
+
+    const answerMark = currentGuessImage.solutionMarker;
+
+    if (answerMark.key !== getLevelKey()) return;
+
+    const answerMarker = document.createElement("img");
+    answerMarker.style.pointerEvents = "none";
+    answerMarker.src = ANSWER_MARKER_SRC;
+    answerMarker.classList.add("answer-marker")
+    answerMarker.style.position = "absolute";
+    answerMarker.style.width = answerMarkerSize + "px";
+    answerMarker.style.height = answerMarkerSize + "px";
+    
+    const {scale} = getTransform();
+    answerMarker.style.transform = `translate(-50%, -50%) scale(${1 / scale})`;
+
+    answerMarker.style.left = answerMark.xPercent + "%";
+    answerMarker.style.top = answerMark.yPercent + "%";
+   
+    spiralContent!.appendChild(answerMarker);
+
+    restoreMarker();
+}
+
 /** Preserves mark through level changes (spiral/world/area) */
 export function saveMarker(): void {
     const spiralContent = document.getElementById("spiral-content");
+    
+    // save guess marker
     const markerElement = spiralContent?.querySelector(".marker") as HTMLElement;
-
     if (markerElement) {
         currentMarker = {
             key: getLevelKey(),
             xPercent: parseFloat(markerElement.style.left),
             yPercent: parseFloat(markerElement.style.top)
         };
-        //console.log(currentMarker.key);
+    }
+
+    // save answer marker
+    const answerMarkerElement = spiralContent?.querySelector(".answer-marker") as HTMLElement;
+    if (answerMarkerElement) {
+        currentAnswerMarker = {
+            key: getLevelKey(),
+            xPercent: parseFloat(answerMarkerElement.style.left),
+            yPercent: parseFloat(answerMarkerElement.style.top)
+        };
     }
 }
 
@@ -377,25 +427,42 @@ export function restoreMarker(): void {
     
     // return if a marker has not been placed yet
     if (!spiralContent || !currentMarker) return;
-
-    // return if marker belongs to a different map level
-    if (currentMarker.key !== getLevelKey()) return;
-
+    
     const {scale} = getTransform();
     
-    const marker = document.createElement("img");
-    marker.style.pointerEvents = "none";
-    marker.src = MARKER_SRC;
-    marker.classList.add("marker")
-    marker.style.position = "absolute";
-    marker.style.width = markerSize + "px";
-    marker.style.height = markerSize + "px";
-    // center on click, counter-scale to stay fixed size
-    marker.style.transform = `translate(-50%, -50%) scale(${1 / scale})`;
-    marker.style.left = currentMarker.xPercent + "%";
-    marker.style.top = currentMarker.yPercent + "%";
-    
-    spiralContent!.appendChild(marker);
+    // restore answer marker if it exsits and is on current level
+    if (currentAnswerMarker && currentAnswerMarker.key === getLevelKey()){
+        const answerMarker = document.createElement("img");
+        answerMarker.style.pointerEvents = "none";
+        answerMarker.src = ANSWER_MARKER_SRC;
+        answerMarker.classList.add("answer-marker")
+        answerMarker.style.position = "absolute";
+        answerMarker.style.width = answerMarkerSize + "px";
+        answerMarker.style.height = answerMarkerSize + "px";
+        answerMarker.style.transform = `translate(-50%, -50%) scale(${1 / scale})`;
+        answerMarker.style.left = currentAnswerMarker.xPercent + "%";
+        answerMarker.style.top = currentAnswerMarker.yPercent + "%";
+        
+        spiralContent!.appendChild(answerMarker);
+        
+    }
+
+    // restore guess marker if it exsits and is on current level
+    if (currentMarker && currentMarker.key === getLevelKey()){
+        const marker = document.createElement("img");
+        marker.style.pointerEvents = "none";
+        marker.src = MARKER_SRC;
+        marker.classList.add("marker")
+        marker.style.position = "absolute";
+        marker.style.width = markerSize + "px";
+        marker.style.height = markerSize + "px";
+        marker.style.transform = `translate(-50%, -50%) scale(${1 / scale})`;
+        marker.style.left = currentMarker.xPercent + "%";
+        marker.style.top = currentMarker.yPercent + "%";
+        
+        spiralContent!.appendChild(marker);
+    }
+
 }
 
 /** Removes markers from map */
@@ -404,8 +471,10 @@ function clearMarkers(): void {
     if (!spiralContent) return;
 
     // remove all rendered markers
-    spiralContent.querySelectorAll(".marker").forEach((marker) => marker.remove())
+    spiralContent.querySelectorAll(".marker, .answer-marker").forEach((marker) => marker.remove())
 
     // clear current guess marker
     currentMarker = null;
+    // clear current answer marker
+    currentAnswerMarker = null
 }

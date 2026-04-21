@@ -189,10 +189,9 @@ function applyTransform(): void {
         inner.style.transformOrigin = "0 0";
         inner.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
 
-        const marker = inner.querySelector(".marker") as HTMLElement | null;
-        if (marker) {
-            marker.style.transform = `translate(-50%, -50%) scale(${1 / currentScale})`;
-        }
+        inner.querySelectorAll(".marker, .answer-marker").forEach((marker) => {
+            (marker as HTMLElement).style.transform = `translate(-50%, -50%) scale(${1 / currentScale})`;
+        });
     }
 }
 
