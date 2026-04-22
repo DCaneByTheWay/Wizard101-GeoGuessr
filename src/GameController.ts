@@ -106,14 +106,13 @@ export function submitGuess(): void {
 
     const [, , guessArea] = currentMarker.key.split(":");
     const [, answerWorld, answerArea] = answerMark.key.split(":");
-    
-    // TODO: get punkkattv to create a function to convert worldClass to worldName ('wizard-city' -> 'Wizard City')
+
     if (guessArea == answerArea) {
         const distance = getMarkDistance(currentMarker, currentAnswerMarker).toFixed(1)
-        scoreBreakdown!.textContent = `${answerWorld}: ${answerArea} (${distance} units away!)`;
+        scoreBreakdown!.textContent = `${formatWorldName(answerWorld!)}: ${answerArea} (${distance} units away!)`;
     }
     else {
-        scoreBreakdown!.textContent = `${answerWorld}: ${answerArea}`;
+        scoreBreakdown!.textContent = `${formatWorldName(answerWorld!)}: ${answerArea}`;
     }
     /*
     You Scored 4900/5000!
@@ -290,11 +289,11 @@ export function getCalculatedScore(
 
 export function getRandomImagePath(): string {
     //const worldName = "Dragonspyre";
-    //const imageList = Object.values(guessImages).flat().filter(img => img.imgSrc.includes('Dragonspyre'));
-    const imageList = Object.values(guessImages).flat();
+    const imageList = Object.values(guessImages).flat().filter(img => !img.imgSrc.includes('Dragonspyre'));
+    //const imageList = Object.values(guessImages).flat();
     const randomGuessImage = imageList[Math.floor(Math.random() * imageList.length)]!;
     const imgSrc = randomGuessImage.imgSrc!;
-    console.log(`current img: ${imgSrc}`)
+    //console.log(`current img: ${imgSrc}`)
     currentGuessImage = randomGuessImage;
     return imgSrc;
 
@@ -477,4 +476,10 @@ function clearMarkers(): void {
     currentMarker = null;
     // clear current answer marker
     currentAnswerMarker = null
+}
+
+// TODO: get punkkattv to create a function to convert worldClass to worldName
+// ('wizard-city' -> 'Wizard City')
+function formatWorldName(worldClass: string): string {
+    return worldClass;
 }
