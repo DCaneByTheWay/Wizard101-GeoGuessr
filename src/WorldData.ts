@@ -80,7 +80,7 @@ export const worlds: World [] = [
     {
         name: "Mooshu",
         class: "mooshu",
-        iconSrc: "./Images/WorldIcons/(Icon)_Mooshu.png",
+        iconSrc: "./Images/WorldIcons/(Icon)_MooShu.png",
         mapSrc: "./Images/Maps/Mooshu/Mooshu.png",
         areas: [
             { name: "Ancient Burial Grounds", imageSrc: "./Images/Maps/Mooshu/AncientBurialGrounds.png", top: "22%", left: "81%", width: "13%", height: "12%" },
