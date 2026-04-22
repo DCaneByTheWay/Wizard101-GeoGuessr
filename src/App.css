@@ -185,3 +185,22 @@ body {
     display: inline-block;
     pointer-events: all;
 }
+
+#img-difficulty {
+    position: fixed;
+    z-index: 9999;         
+    left: 16px;
+    bottom: 16px;
+    transform: none;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    pointer-events: none;
+    margin: 0;
+    font-size: 52px;
+    font-weight: bold;
+    text-shadow:
+    -2px -2px 0 black,
+     2px -2px 0 black,
+    -2px  2px 0 black,
+     2px  2px 0 black;   
+}

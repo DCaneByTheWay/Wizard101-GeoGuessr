@@ -1,5 +1,5 @@
 import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
-import { Difficulty, guessImages, GuessImage } from "./ImageData.js";
+import { Difficulty, guessImages, GuessImage, difficultyToString } from "./ImageData.js";
 import { Area, worlds } from "./WorldData.js";
 
 const markerSize = 30;
@@ -38,6 +38,7 @@ const submitAnswerButton = document.getElementById("submit-guess-button");
 const scoreDisplay = document.getElementById("score-display");
 const scoreBreakdown = document.getElementById("score-breakdown");
 export const nextRoundButton = document.getElementById("next-round-button");
+const imgDifficulty = document.getElementById("img-difficulty");
 
 let currentGuessImage: GuessImage | null = null;
 
@@ -76,6 +77,10 @@ export function startRound(): void {
     resetToSpiral(container!, worlds);
     const imgSrc = getRandomImagePath();
     setBackgroundImage(imgSrc);
+    
+    const currentDifficulty = difficultyToString(currentGuessImage!.difficulty)
+    imgDifficulty!.textContent = `Difficulty: ${currentDifficulty}`;
+
     // TODO: add actual game logic
 }
 
@@ -289,7 +294,8 @@ export function getCalculatedScore(
 
 export function getRandomImagePath(): string {
     //const worldName = "Dragonspyre";
-    const imageList = Object.values(guessImages).flat().filter(img => !img.imgSrc.includes('Dragonspyre'));
+    //const imageList = Object.values(guessImages).flat().filter(img => !img.imgSrc.includes('Dragonspyre'));
+    const imageList = Object.values(guessImages).flat().filter(img => (img.difficulty !== Difficulty.GOOFY));
     //const imageList = Object.values(guessImages).flat();
     const randomGuessImage = imageList[Math.floor(Math.random() * imageList.length)]!;
     const imgSrc = randomGuessImage.imgSrc!;

@@ -3,7 +3,8 @@ export declare enum Difficulty {
     EASY = 1,
     MEDIUM = 2,
     HARD = 3,
-    GOOFY = 4
+    GOOFY = 4,
+    UNDEFINED = 999
 }
 export interface GuessImage {
     imgSrc: string;
@@ -15,5 +16,6 @@ export interface GuessImage {
         yPercent: number;
     };
 }
+export declare function difficultyToString(difficulty: Difficulty): string;
 export declare const guessImages: Record<string, GuessImage[]>;
 //# sourceMappingURL=ImageData.d.ts.map
