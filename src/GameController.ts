@@ -1,6 +1,6 @@
 import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
 import { Difficulty, guessImages, GuessImage, difficultyToString } from "./ImageData.js";
-import { Area, worlds } from "./WorldData.js";
+import { World, Area, worlds } from "./WorldData.js";
 
 const markerSize = 30;
 const answerMarkerSize = markerSize*2;
@@ -80,8 +80,6 @@ export function startRound(): void {
     
     const currentDifficulty = difficultyToString(currentGuessImage!.difficulty)
     imgDifficulty!.textContent = `Difficulty: ${currentDifficulty}`;
-
-    // TODO: add actual game logic
 }
 
 /** Submits location of current marker */
@@ -147,7 +145,7 @@ function getHoveredArea(mark: {key: string, xPercent: number, yPercent: number})
 
     // if mark is in spiral level
     if (mark.key === "spiral") {
-        // TODO: return world icon that the mark is hovering, or create new function to do this
+        // implemented in getHoveredWorld
     }
     // if mark is in world level
     else if (mark.key.includes("world")) {
@@ -184,6 +182,40 @@ function getHoveredArea(mark: {key: string, xPercent: number, yPercent: number})
 
     // return null if mark is in no area
     return null;
+}
+
+function getHoveredWorld(mark: {key: string, xPercent: number, yPercent: number}): World | null {
+    
+    // return null if we are not on spiral level
+    if (mark.key !== "spiral") return null;
+    
+    const rect = container!.getBoundingClientRect();
+    const { scale, tx, ty } = getTransform();
+
+    // convert stored mark coords to content px
+    const contentX = (mark.xPercent / 100) * rect.width;
+    const contentY = (mark.yPercent / 100) * rect.height;
+
+    // convert content px to viewport px
+    const screenX = rect.left + tx + contentX * scale;
+    const screenY = rect.top + ty + contentY * scale;
+
+    // find topmost world icon at that point (i tried really hard for worlds to not stack)
+    const hit = document
+        .elementsFromPoint(screenX, screenY)
+        .find((el) => (el as HTMLElement)
+        .classList?.contains("world-icon")) as HTMLElement | undefined;
+
+
+    // get world class
+    const worldClass = hit?.dataset.world;
+
+    // return if there is no world class (no target)
+    if (!worldClass) return null;
+
+    // return world
+    const world = worlds.find((w) => w.class === worldClass) ?? null
+    return world;
 }
 
 /** Takes distance and returns score calculation with constant values */
@@ -226,7 +258,16 @@ export function getCalculatedScore(
 
     // if guess marker is at spiral level
     if (guessMark.key === "spiral") {
-        // TODO: implement logic to find if marker is on world icon
+
+        // get world class under guess mark and answer world class
+        const hoveredWorldClass = getHoveredWorld(guessMark)?.class;
+        const [, answerWorldClass, ] = answerMark.key.split(":");
+
+        // if the the hovered world class matches the answer world class
+        if (hoveredWorldClass === answerWorldClass) {
+            // increase score by correct world score
+            score += WORLD_SCORE;
+        }
     }
 
     // if guess marker is at world level
