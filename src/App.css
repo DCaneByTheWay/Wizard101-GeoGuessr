@@ -129,14 +129,15 @@ body {
 #submit-guess-button {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    border-radius: 12px;
+    border-radius: 20px;
     background-color: rgb(152, 151, 154);
     color: white;
     font-size: 20px;
-    height: 30px;
+    height: 40px;
     width: var(--spiral-width);
     transition: 0.1s ease-out;
     display: inline-block;
+    margin: 15px;
 }
 
 .round-finalization{
