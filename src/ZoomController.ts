@@ -23,7 +23,7 @@ let zoomInTicks = 0;
 let zoomOutTicks = 0;
 let requiresZoomInThreshold = false;
 const ZOOM_IN_THRESHOLD = 5;
-const ZOOM_OUT_THRESHOLD = 15;
+const ZOOM_OUT_THRESHOLD = 10;
 
 export function init(container: HTMLElement, worlds: World[]): void {
     // track what the user is hovering over
