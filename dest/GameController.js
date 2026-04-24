@@ -61,6 +61,7 @@ export function startRound() {
     resetToSpiral(container, worlds);
     const imgSrc = getRandomImagePath();
     setBackgroundImage(imgSrc);
+    // TODO: create difficulty visual meter instead of text
     const currentDifficulty = difficultyToString(currentGuessImage.difficulty);
     imgDifficulty.textContent = `Difficulty: ${currentDifficulty}`;
 }
@@ -172,6 +173,7 @@ function getHoveredWorld(mark) {
 function getDistanceScoreCalculation(distance) {
     // derived from actual geoguessr score calculation
     // TODO: tweak this to make it better
+    // i want guesses within 1% distance to be MAX_SCORE (will figure out how to incorperate map size)
     return WORLD_SCORE + AREA_SCORE + MAXIMUM_DISTANCE_SCORE * Math.E ** (-6.7 * distance / currentGuessImage?.mapSize);
 }
 /** Takes guessMark and answerMark, and returns score for the round */

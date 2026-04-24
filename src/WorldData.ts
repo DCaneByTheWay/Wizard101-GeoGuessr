@@ -118,49 +118,120 @@ export const worlds: World [] = [
         name: "Grizzleheim",
         class: "grizzleheim",
         iconSrc: "./Images/WorldIcons/(Icon)_Grizzleheim.png",
-        mapSrc: "./Images/Maps/Grizzleheim.png",
-        areas: []
-    },
-    {
-        name: "Wysteria",
-        class: "wysteria",
-        iconSrc: "./Images/WorldIcons/(Icon)_Wysteria.png",
-        mapSrc: "./Images/Maps/Wysteria.png",
-        areas: []
+        mapSrc: "./Images/Maps/Grizzleheim/Grizzleheim.png",
+        areas: [
+            { name: "Mirkholm Keep",    imageSrc: "./Images/Maps/Grizzleheim/MirkholmKeep.png",    top: "28%", left: "68%", width: "13%", height: "9%"  },
+            { name: "Nidavellir",       imageSrc: "./Images/Maps/Grizzleheim/Nidavellir.png",      top: "59%", left: "71%", width: "16%", height: "6%"  },
+            { name: "Northguard",       imageSrc: "./Images/Maps/Grizzleheim/Northguard.png",      top: "42%", left: "47%", width: "23%", height: "7%"  },
+            { name: "Ravenscar",        imageSrc: "./Images/Maps/Grizzleheim/Ravenscar.png",       top: "51%", left: "28%", width: "14%", height: "5%"  },
+            { name: "Savarstaad Pass",  imageSrc: "./Images/Maps/Grizzleheim/SavarstaadPass.png",  top: "42%", left: "77%", width: "15%", height: "10%" },
+            { name: "Vigrid Roughland", imageSrc: "./Images/Maps/Grizzleheim/VigridRoughland.png", top: "37%", left: "28%", width: "15%", height: "9%"  },
+        ]
     },
     {
         name: "Celestia",
         class: "celestia",
         iconSrc: "./Images/WorldIcons/(Icon)_Celestia.png",
-        mapSrc: "./Images/Maps/Celestia.png",
-        areas: []
+        mapSrc: "./Images/Maps/Celestia/Celestia.png",
+        areas: [
+            { name: "Celestia Base Camp",    imageSrc: "./Images/Maps/Celestia/CelestiaBaseCamp.png",   top: "41%", left: "40%", width: "21%", height: "11%" },
+            { name: "Crustacean Empire",     imageSrc: "./Images/Maps/Celestia/CrustaceanEmpire.png",   top: "21%", left: "41%", width: "17%", height: "11%" },
+            { name: "District of the Stars", imageSrc: "./Images/Maps/Celestia/DistrictOfTheStars.png", top: "49%", left: "73%", width: "16%", height: "12%" },
+            { name: "Science Center",        imageSrc: "./Images/Maps/Celestia/ScienceCenter.png",      top: "59%", left: "38%", width: "14%", height: "10%" },
+            { name: "Stormriven",            imageSrc: "./Images/Maps/Celestia/Stormriven.png",         top: "68%", left: "63%", width: "18%", height: "5%"  },
+            { name: "Stormriven Hall",       imageSrc: "./Images/Maps/Celestia/StormrivenHall.png",     top: "83%", left: "64%", width: "17%", height: "10%" },
+            { name: "Survey Camp",           imageSrc: "./Images/Maps/Celestia/SurveyCamp.png",         top: "25%", left: "25%", width: "14%", height: "9%"  },
+            { name: "The Floating Land",     imageSrc: "./Images/Maps/Celestia/TheFloatingLand.png",    top: "36%", left: "7%",  width: "19%", height: "9%"  },
+            { name: "The Grotto",            imageSrc: "./Images/Maps/Celestia/TheGrotto.png",          top: "6%",  left: "41%", width: "14%", height: "9%"  },
+        ]
+    },
+    {
+        name: "Wysteria",
+        class: "wysteria",
+        iconSrc: "./Images/WorldIcons/(Icon)_Wysteria.png",
+        mapSrc: "./Images/Maps/Wysteria/Wysteria.png",
+        areas: [
+            { name: "Pegasus Place",    imageSrc: "./Images/Maps/Wysteria/PegasusPlace.png",    top: "16%", left: "19%", width: "14%", height: "10%" },
+            { name: "Pigswick Academy", imageSrc: "./Images/Maps/Wysteria/PigswickAcademy.png", top: "47%", left: "35%", width: "19%", height: "10%" },
+            { name: "Tanglewood Way",   imageSrc: "./Images/Maps/Wysteria/TanglewoodWay.png",   top: "67%", left: "7%",  width: "18%", height: "10%" },
+        ]
     },
     {
         name: "Zafaria",
         class: "zafaria",
         iconSrc: "./Images/WorldIcons/(Icon)_Zafaria.png",
-        mapSrc: "./Images/Maps/Zafaria.png",
-        areas: []
+        mapSrc: "./Images/Maps/Zafaria/Zafaria.png",
+        areas: [
+            { name: "Baobab Crossroads",  imageSrc: "./Images/Maps/Zafaria/BaobabCrossroads.png",  top: "52%", left: "27%", width: "23%", height: "11%" },
+            { name: "Baobab Market",      imageSrc: "./Images/Maps/Zafaria/BaobabMarket.png",      top: "53%", left: "56%", width: "12%", height: "9%"  },
+            { name: "Drum Jungle",        imageSrc: "./Images/Maps/Zafaria/DrumJungle.png",        top: "27%", left: "67%", width: "11%", height: "9%"  },
+            { name: "Elephant Graveyard", imageSrc: "./Images/Maps/Zafaria/ElephantGraveyard.png", top: "10%", left: "56%", width: "14%", height: "9%"  },
+            { name: "Savannah",           imageSrc: "./Images/Maps/Zafaria/Savannah.png",          top: "77%", left: "28%", width: "13%", height: "6%"  },
+            { name: "Stone Town",         imageSrc: "./Images/Maps/Zafaria/StoneTown.png",         top: "53%", left: "74%", width: "10%", height: "9%"  },
+            { name: "Waterfront",         imageSrc: "./Images/Maps/Zafaria/Waterfront.png",        top: "42%", left: "78%", width: "17%", height: "7%"  },
+            { name: "Zamunda",            imageSrc: "./Images/Maps/Zafaria/Zamunda.png",           top: "36%", left: "6%",  width: "13%", height: "6%"  },
+            { name: "Zamunda Outskirts",  imageSrc: "./Images/Maps/Zafaria/ZamundaOutskirts.png",  top: "54%", left: "4%",  width: "15%", height: "9%"  },
+        ]
     },
     {
         name: "Avalon",
         class: "avalon",
         iconSrc: "./Images/WorldIcons/(Icon)_Avalon.png",
-        mapSrc: "./Images/Maps/Avalon.png",
-        areas: []
+        mapSrc: "./Images/Maps/Avalon/Avalon.png",
+        areas: [
+            { name: "Abbey Road",    imageSrc: "./Images/Maps/Avalon/AbbeyRoad.png",    top: "65%", left: "79%", width: "10%", height: "9%"  },
+            { name: "Caer Lyon",     imageSrc: "./Images/Maps/Avalon/CaerLyon.png",     top: "43%", left: "56%", width: "10%", height: "9%"  },
+            { name: "Caliburn",      imageSrc: "./Images/Maps/Avalon/Caliburn.png",     top: "75%", left: "55%", width: "16%", height: "7%"  },
+            { name: "Catacombs",     imageSrc: "./Images/Maps/Avalon/Catacombs.png",    top: "43%", left: "79%", width: "16%", height: "6%"  },
+            { name: "Crystal Caves", imageSrc: "./Images/Maps/Avalon/CrystalCaves.png", top: "53%", left: "82%", width: "12%", height: "9%"  },
+            { name: "Deepwater",     imageSrc: "./Images/Maps/Avalon/Deepwater.png",    top: "34%", left: "80%", width: "15%", height: "6%"  },
+            { name: "Dun Dara",      imageSrc: "./Images/Maps/Avalon/DunDara.png",      top: "24%", left: "14%", width: "9%",  height: "9%"  },
+            { name: "High Road",     imageSrc: "./Images/Maps/Avalon/HighRoad.png",     top: "61%", left: "50%", width: "9%",  height: "9%"  },
+            { name: "LakeShore",     imageSrc: "./Images/Maps/Avalon/LakeShore.png",    top: "25%", left: "74%", width: "16%", height: "6%"  },
+            { name: "Outer Yard",    imageSrc: "./Images/Maps/Avalon/OuterYard.png",    top: "28%", left: "50%", width: "10%", height: "9%"  },
+            { name: "The Wild",      imageSrc: "./Images/Maps/Avalon/TheWild.png",      top: "45%", left: "38%", width: "9%",  height: "9%"  },
+            { name: "The Wyrd",      imageSrc: "./Images/Maps/Avalon/TheWyrd.png",      top: "35%", left: "26%", width: "10%", height: "10%" },
+        ]
     },
     {
         name: "Azteca",
         class: "azteca",
         iconSrc: "./Images/WorldIcons/(Icon)_Azteca.png",
-        mapSrc: "./Images/Maps/Azteca.png",
-        areas: []
+        mapSrc: "./Images/Maps/Azteca/Azteca.png",
+        areas: [
+            { name: "Alto Alto",          imageSrc: "./Images/Maps/Azteca/AltoAlto.png",          top: "61%", left: "28%", width: "9%",  height: "9%"  },
+            { name: "Cenote",             imageSrc: "./Images/Maps/Azteca/Cenote.png",            top: "60%", left: "42%", width: "10%", height: "6%"  },
+            { name: "Cloudburst Forest",  imageSrc: "./Images/Maps/Azteca/CloudburstForest.png",  top: "77%", left: "19%", width: "16%", height: "9%"  },
+            { name: "Floating Mountains", imageSrc: "./Images/Maps/Azteca/FloatingMountains.png", top: "60%", left: "72%", width: "15%", height: "9%"  },
+            { name: "Mangrove Marsh",     imageSrc: "./Images/Maps/Azteca/MangroveMarsh.png",     top: "22%", left: "37%", width: "15%", height: "9%"  },
+            { name: "Pitch Black Lake",   imageSrc: "./Images/Maps/Azteca/PitchBlackLake.png",    top: "53%", left: "2%",  width: "16%", height: "9%"  },
+            { name: "Saltmeadow Swamp",   imageSrc: "./Images/Maps/Azteca/SaltmeadowSwamp.png",   top: "36%", left: "14%", width: "15%", height: "9%"  },
+            { name: "The Zocalo",         imageSrc: "./Images/Maps/Azteca/TheZocalo.png",         top: "39%", left: "55%", width: "15%", height: "9%"  },
+            { name: "Three Points",       imageSrc: "./Images/Maps/Azteca/ThreePoints.png",       top: "49%", left: "40%", width: "12%", height: "9%"  },
+            { name: "Tierra De Brea",     imageSrc: "./Images/Maps/Azteca/TierraDeBrea.png",      top: "65%", left: "9%",  width: "13%", height: "9%"  },
+            { name: "Twin Giants",        imageSrc: "./Images/Maps/Azteca/TwinGiants.png",        top: "14%", left: "81%", width: "10%", height: "9%"  },
+            { name: "Zultun Dock",        imageSrc: "./Images/Maps/Azteca/ZultunDock.png",        top: "81%", left: "49%", width: "12%", height: "8%"  },
+        ]
     },
     {
         name: "Khrysalis",
         class: "khrysalis",
         iconSrc: "./Images/WorldIcons/(Icon)_Khrysalis.png",
-        mapSrc: "./Images/Maps/Khrysalis.png",
-        areas: []
+        mapSrc: "./Images/Maps/Khrysalis/Khrysalis.png",
+        areas: [
+            { name: "Bastion",         imageSrc: "./Images/Maps/Khrysalis/Bastion.png",        top: "86%", left: "76%", width: "17%", height: "7%" },
+            { name: "Crescent Beach",  imageSrc: "./Images/Maps/Khrysalis/CrescentBeach.png",  top: "61%", left: "19%", width: "14%", height: "9%" },
+            { name: "Fort Rachias",    imageSrc: "./Images/Maps/Khrysalis/FortRachias.png",    top: "60%", left: "45%", width: "13%", height: "9%" },
+            { name: "Kondha Desert",   imageSrc: "./Images/Maps/Khrysalis/KondhaDesert.png",   top: "11%", left: "45%", width: "13%", height: "9%" },
+            { name: "Last Wood",       imageSrc: "./Images/Maps/Khrysalis/LastWood.png",       top: "42%", left: "79%", width: "10%", height: "9%" },
+            { name: "Moon Cliffs",     imageSrc: "./Images/Maps/Khrysalis/MoonCliffs.png",     top: "57%", left: "80%", width: "11%", height: "9%" },
+            { name: "Radiance Reborn", imageSrc: "./Images/Maps/Khrysalis/RadianceReborn.png", top: "26%", left: "72%", width: "14%", height: "9%" },
+            { name: "Ruined Alcazar",  imageSrc: "./Images/Maps/Khrysalis/RuinedAlcazar.png",  top: "46%", left: "47%", width: "14%", height: "9%" },
+            { name: "Sardonyx",        imageSrc: "./Images/Maps/Khrysalis/Sardonyx.png",       top: "26%", left: "46%", width: "15%", height: "7%" },
+            { name: "Shadow Palace",   imageSrc: "./Images/Maps/Khrysalis/ShadowPalace.png",   top: "39%", left: "14%", width: "14%", height: "9%" },
+            { name: "Silent Market",   imageSrc: "./Images/Maps/Khrysalis/SilentMarket.png",   top: "84%", left: "56%", width: "13%", height: "9%" },
+            { name: "The Hive",        imageSrc: "./Images/Maps/Khrysalis/TheHive.png",        top: "11%", left: "25%", width: "10%", height: "9%" },
+            { name: "Tyrian Gorge",    imageSrc: "./Images/Maps/Khrysalis/TyrianGorge.png",    top: "75%", left: "42%", width: "14%", height: "9%" },
+        ]
     },
 ];

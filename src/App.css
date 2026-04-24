@@ -69,10 +69,10 @@ body {
     position: absolute;
     cursor: pointer;
     background: transparent;
+    outline: 2px solid gold;
     /* debug: uncomment to see hotspots */
     /* background: rgba(255, 0, 0, 0.3); */
     color: transparent;
-    outline: 2px solid gold
 }
 
 .wizard-city { top: 30%; left: 47%; }

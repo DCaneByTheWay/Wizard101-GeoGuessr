@@ -55,15 +55,15 @@ function setMapSizeSmall() {
 }
 /** Function to be used to debug boarders */
 function DebugWorldAreaBoarders() {
-    const debugWorldName = "Dragonspyre"; // change string to world name to debug
+    const debugWorldName = "Khrysalis"; // change string to world name to debug
     const debugWorld = worlds.find(world => world.name === debugWorldName);
     setMapSize(MAP_SIZES.MEDIUM);
     render(spiral, 1, worlds, debugWorld, null);
 }
-// DebugWorldAreaBoarders();
+startRound();
+//DebugWorldAreaBoarders();
 // const debugBoarderButton = document.getElementById('debug-boarder-button');
 // debugBoarderButton!.onclick = DebugWorldAreaBoarders;
-startRound();
 container.onmouseenter = () => {
     setMapSizeMedium();
     restoreTransform();

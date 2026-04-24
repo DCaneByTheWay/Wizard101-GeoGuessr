@@ -25,6 +25,7 @@ export function difficultyToString(difficulty) {
             return "UNDEFINED";
     }
 }
+// TODO: implement list of worlds in arc1, arc2, etc..
 export const guessImages = {
     "wizard-city": [
         { imgSrc: "Images/GuessImages/WizardCity1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:wizard-city:Unicorn Way", xPercent: 30.3, yPercent: 71.3 } },
@@ -85,5 +86,8 @@ export const guessImages = {
         { imgSrc: "Images/GuessImages/Dragonspyre6.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: { key: "area:dragonspyre:The Drake Hatchery", xPercent: 53.1, yPercent: 61.7 } },
         { imgSrc: "Images/GuessImages/Dragonspyre7.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: { key: "area:dragonspyre:The Drake Hatchery", xPercent: 48.9, yPercent: 78.1 } },
     ],
+    // TODO: add more arc 1 guessImages
+    // TODO: add arc 2 guessImages
+    // TODO: add arc 2 maps
 };
 //# sourceMappingURL=ImageData.js.map

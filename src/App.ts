@@ -1,7 +1,7 @@
 import { init, saveAndScaleTransform, restoreTransform } from "./ZoomController.js";
 import { worlds } from "./WorldData.js";
 import { render } from "./Renderer.js";
-import { getRandomImagePath, startRound, submitGuess, nextRoundButton } from "./GameController.js";
+import { startRound, submitGuess, nextRoundButton } from "./GameController.js";
 
 const spiral = document.getElementById("Spiral");
 const container = document.getElementById("Wizard101GeoGuessrMap");
@@ -69,18 +69,17 @@ function setMapSizeSmall(): void {
 
 /** Function to be used to debug boarders */
 function DebugWorldAreaBoarders(): void {
-  const debugWorldName = "Dragonspyre" // change string to world name to debug
+  const debugWorldName = "Khrysalis" // change string to world name to debug
   const debugWorld = worlds.find(world => world.name === debugWorldName);
 
   setMapSize(MAP_SIZES.MEDIUM);
   render(spiral!, 1, worlds, debugWorld!, null);
 }
 
-// DebugWorldAreaBoarders();
+startRound();
+//DebugWorldAreaBoarders();
 // const debugBoarderButton = document.getElementById('debug-boarder-button');
 // debugBoarderButton!.onclick = DebugWorldAreaBoarders;
-
-startRound();
 
 container!.onmouseenter = () => {
   setMapSizeMedium();

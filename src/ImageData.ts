@@ -37,7 +37,9 @@ export function difficultyToString(difficulty: Difficulty): string {
     }
 }
 
-export const guessImages: Record<string, GuessImage[]> = {
+// TODO: implement list of worlds in arc1, arc2, etc..
+
+export const guessImages: Record<string, GuessImage[]> = { // TODO: set mapsize for all maps
     "wizard-city": [
         {imgSrc: "Images/GuessImages/WizardCity1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: {key: "area:wizard-city:Unicorn Way", xPercent: 30.3, yPercent: 71.3}},
         {imgSrc: "Images/GuessImages/WizardCity2.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: {key: "area:wizard-city:Nightside", xPercent: 34.1, yPercent: 61.3}},
@@ -97,4 +99,7 @@ export const guessImages: Record<string, GuessImage[]> = {
         {imgSrc: "Images/GuessImages/Dragonspyre6.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: {key: "area:dragonspyre:The Drake Hatchery", xPercent: 53.1, yPercent: 61.7}},
         {imgSrc: "Images/GuessImages/Dragonspyre7.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: {key: "area:dragonspyre:The Drake Hatchery", xPercent: 48.9, yPercent: 78.1}},
     ],
+    // TODO: add more arc 1 guessImages
+    // TODO: add arc 2 guessImages
+    // TODO: add arc 2 maps
 }
