@@ -1,3 +1,4 @@
+import { rerenderMarkers, setLastNonGoofyMarkerSrc } from "./GameController.js";
 import { setZoomSpeed } from "./ZoomController.js";
 
 const settingsGear = document.getElementById("settings-gear");
@@ -14,11 +15,22 @@ export let currentMarkSrc = DEFAULT_MARK_SRC;
 markSkinButton?.addEventListener("click", () => (markSkinDialogElement as HTMLDialogElement).showModal());
 markSkinDialogCloseButton?.addEventListener("click", () => (markSkinDialogElement as HTMLDialogElement).close());
 
+export function setMarkSrc(newMarkSrc: string): void {
+    currentMarkSrc = newMarkSrc;
+    setLastNonGoofyMarkerSrc(newMarkSrc);
+}
+
+export function setMarkSkinButtonSrc(newMarkSrc: string): void {
+    (markSkinButton as HTMLImageElement).src = newMarkSrc;
+}
+
 document.querySelectorAll(".mark-skin-option").forEach((img) => {
     img.addEventListener("click", () => {
-        currentMarkSrc = (img as HTMLImageElement).src;
-        (markSkinButton as HTMLImageElement).src = currentMarkSrc;
+        const newSrc = (img as HTMLImageElement).src;
+        setMarkSrc(newSrc);
+        setMarkSkinButtonSrc(newSrc);
         markSkinDialogElement.close();
+        rerenderMarkers();
     });
 });
 

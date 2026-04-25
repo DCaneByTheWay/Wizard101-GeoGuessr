@@ -268,6 +268,11 @@ body {
     background: rgba(0, 0, 0, 0.5);
 }
 
+#settings-dialog-title {
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
 #mark-skin-button,
 .mark-skin-option {
     cursor: pointer;
@@ -313,7 +318,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin: 8px 0;
+    margin: 15px 0;
 }
 
 #zoom-slider {
@@ -353,7 +358,7 @@ body {
 }
 
 #arc-selection {
-    margin: 8px 0;
+    margin: 15px 0;
     text-align: left;
 }
 

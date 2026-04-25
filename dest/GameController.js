@@ -1,7 +1,7 @@
 import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
 import { Difficulty, guessImages, difficultyToString, difficultyToValue } from "./ImageData.js";
 import { worlds } from "./WorldData.js";
-import { currentMarkSrc } from "./Settings.js";
+import { currentMarkSrc, setMarkSkinButtonSrc, setMarkSrc } from "./Settings.js";
 const markerSize = 30;
 const answerMarkerSize = markerSize * 2;
 const imageElement = document.getElementById("guess-image");
@@ -22,6 +22,8 @@ document.addEventListener('keydown', (e) => {
     }
 });
 const ANSWER_MARKER_SRC = "./Images/Markers/(Icon)_Quests.png";
+export const GOOFY_MARKER_SRC = "./Images/Markers/(Icon)_Shadow_Trickster.png";
+let lastNonGoofyMarkerSrc = currentMarkSrc;
 let currentMarker = null;
 let currentAnswerMarker = null;
 let hasSubmittedGuess = false;
@@ -273,13 +275,27 @@ export function getCalculatedScore(guessMark, answerMark) {
 export function getRandomImagePath() {
     //const worldName = "Dragonspyre";
     //const imageList = Object.values(guessImages).flat().filter(img => !img.imgSrc.includes('Dragonspyre'));
-    const imageList = Object.values(guessImages).flat().filter(img => (img.difficulty !== Difficulty.UNDEFINED));
+    const imageList = Object.values(guessImages).flat().filter(img => (img.imgSrc.includes('City') && img.difficulty >= Difficulty.HARD && img.difficulty !== Difficulty.UNDEFINED));
     //const imageList = Object.values(guessImages).flat();
     const randomGuessImage = imageList[Math.floor(Math.random() * imageList.length)];
     const imgSrc = randomGuessImage.imgSrc;
     //console.log(`current img: ${imgSrc}`)
     currentGuessImage = randomGuessImage;
+    // set icon to goofy src on goofy guess
+    if (currentGuessImage.difficulty === Difficulty.GOOFY) {
+        setMarkSrc(GOOFY_MARKER_SRC);
+        setMarkSkinButtonSrc(GOOFY_MARKER_SRC);
+    }
+    else if (currentMarkSrc === GOOFY_MARKER_SRC) {
+        setMarkSrc(lastNonGoofyMarkerSrc);
+        setMarkSkinButtonSrc(lastNonGoofyMarkerSrc);
+    }
     return imgSrc;
+}
+export function setLastNonGoofyMarkerSrc(markSrc) {
+    if (markSrc !== GOOFY_MARKER_SRC) {
+        lastNonGoofyMarkerSrc = markSrc;
+    }
 }
 /** Places new mark or replaces existing mark */
 export function placeMarker(e) {
@@ -351,11 +367,8 @@ function placeAnswerMarker() {
     answerMarker.style.left = answerMark.xPercent + "%";
     answerMarker.style.top = answerMark.yPercent + "%";
     spiralContent.appendChild(answerMarker);
-    restoreMarker();
-    // it doesnt REALLY matter, but 
-    // TODO: fix bug where a second guess mark is placed
-    // because i rerender the marks once the answer mark is placed
-    // so the answer mark is rendered underneath the guess mark
+    // rerender so guess mark appears on top of answer mark
+    rerenderMarkers();
 }
 /** Preserves mark through level changes (spiral/world/area) */
 export function saveMarker() {
@@ -414,6 +427,18 @@ export function restoreMarker() {
         marker.style.top = currentMarker.yPercent + "%";
         spiralContent.appendChild(marker);
     }
+}
+/** Rerenders marks on current level */
+export function rerenderMarkers() {
+    const spiralContent = document.getElementById("spiral-content");
+    if (!spiralContent)
+        return;
+    // save positions of all current markers
+    saveMarker();
+    // remove all rendered markers
+    spiralContent.querySelectorAll(".marker, .answer-marker").forEach((marker) => marker.remove());
+    // restore: answer marker first so guess marker is on top
+    restoreMarker();
 }
 /** Removes markers from map */
 function clearMarkers() {
