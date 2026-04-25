@@ -4,6 +4,8 @@
     --spiral-height: 240px;
     --world-icons-width: 36px;
     --world-icons-height: 36px;
+    --difficulty-bar-width: 240px;
+    --difficulty-bar-background: linear-gradient(to right, #44cc44, #ffcc00, #ff3300);
 }
 
 #title {
@@ -191,7 +193,7 @@ body {
     position: fixed;
     z-index: 9999;         
     left: 16px;
-    bottom: 16px;
+    bottom: 55px;
     transform: none;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -204,4 +206,33 @@ body {
      2px -2px 0 black,
     -2px  2px 0 black,
      2px  2px 0 black;   
+}
+
+.difficulty-bar {
+    position: fixed;
+    bottom: 24px;   /* tweak to sit near #img-difficulty */
+    left: 16px;
+    width: var(--difficulty-bar-width);
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.4);  /* dark track behind fill */
+    border-radius: 14px;
+    overflow: hidden;   /* critical — clips the fill to the track shape */
+    z-index: 9999;
+}
+
+.difficulty-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #44cc44, #ffcc00, #ff3300);
+    background-size: var(--difficulty-bar-width) 100%;  /* match the track's width */
+    background-repeat: no-repeat;
+    transition: width 0.3s ease;
+    border-radius: 14px;
+}
+
+.difficulty-bar-fill.goofy {
+    /* background: linear-gradient(to right, #00ffff, #ff00ff, #00ffff, #ff00ff, #00ffff, #ff00ff, #00ffff); */
+    background: linear-gradient(to right, purple, gold, purple, gold, purple, gold, purple);
+    background-size: var(--difficulty-bar-width) 100%;
+    background-repeat: no-repeat;
 }

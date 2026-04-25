@@ -1,5 +1,5 @@
 import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
-import { Difficulty, guessImages, difficultyToString } from "./ImageData.js";
+import { Difficulty, guessImages, difficultyToString, difficultyToValue } from "./ImageData.js";
 import { worlds } from "./WorldData.js";
 const markerSize = 30;
 const answerMarkerSize = markerSize * 2;
@@ -31,6 +31,7 @@ const scoreDisplay = document.getElementById("score-display");
 const scoreBreakdown = document.getElementById("score-breakdown");
 export const nextRoundButton = document.getElementById("next-round-button");
 const imgDifficulty = document.getElementById("img-difficulty");
+const difficultyBarFill = document.querySelector(".difficulty-bar-fill");
 let currentGuessImage = null;
 // max score for a perfect guess
 const MAX_SCORE = 5000;
@@ -58,12 +59,22 @@ export function startRound() {
     // reset submit answer button
     submitAnswerButton.textContent = "Place your Mark!";
     submitAnswerButton.style.backgroundColor = 'rgb(152, 151, 154)';
+    // set map to spiral level
     resetToSpiral(container, worlds);
+    // get new round image
     const imgSrc = getRandomImagePath();
     setBackgroundImage(imgSrc);
-    // TODO: create difficulty visual meter instead of text
+    // get and display difficulty in text
     const currentDifficulty = difficultyToString(currentGuessImage.difficulty);
     imgDifficulty.textContent = `Difficulty: ${currentDifficulty}`;
+    // get and display difficulty in meter
+    const currentDifficultyValue = difficultyToValue(currentGuessImage.difficulty) * 100;
+    difficultyBarFill.style.width = `${currentDifficultyValue}%`;
+    // change css class if goofy
+    difficultyBarFill.className = "difficulty-bar-fill"; // reset to base class
+    if (currentGuessImage.difficulty === Difficulty.GOOFY) {
+        difficultyBarFill.classList.add("goofy");
+    }
 }
 /** Submits location of current marker */
 export function submitGuess() {
@@ -77,6 +88,7 @@ export function submitGuess() {
     hasSubmittedGuess = true;
     const answerMark = currentGuessImage?.solutionMarker;
     const score = getCalculatedScore(currentMarker, answerMark);
+    // TODO: preserve score through multiple rounds
     roundFinalizationDiv.style.visibility = "visible";
     // place answer mark on map
     placeAnswerMarker();
@@ -95,11 +107,6 @@ export function submitGuess() {
     else {
         scoreBreakdown.textContent = `${formatWorldName(answerWorld)}: ${answerArea}`;
     }
-    /*
-    You Scored 4900/5000!
-    {World}: {Area} (50 units away!)
-
-    */
 }
 /** Takes two marks and returns distance */
 function getMarkDistance(mark1, mark2) {
@@ -266,7 +273,7 @@ export function getCalculatedScore(guessMark, answerMark) {
 export function getRandomImagePath() {
     //const worldName = "Dragonspyre";
     //const imageList = Object.values(guessImages).flat().filter(img => !img.imgSrc.includes('Dragonspyre'));
-    const imageList = Object.values(guessImages).flat().filter(img => (img.difficulty !== Difficulty.GOOFY));
+    const imageList = Object.values(guessImages).flat().filter(img => (img.difficulty !== Difficulty.UNDEFINED));
     //const imageList = Object.values(guessImages).flat();
     const randomGuessImage = imageList[Math.floor(Math.random() * imageList.length)];
     const imgSrc = randomGuessImage.imgSrc;
