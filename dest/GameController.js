@@ -1,6 +1,7 @@
 import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
 import { Difficulty, guessImages, difficultyToString, difficultyToValue } from "./ImageData.js";
 import { worlds } from "./WorldData.js";
+import { currentMarkSrc } from "./Settings.js";
 const markerSize = 30;
 const answerMarkerSize = markerSize * 2;
 const imageElement = document.getElementById("guess-image");
@@ -20,7 +21,6 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
     }
 });
-const MARKER_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
 const ANSWER_MARKER_SRC = "./Images/Markers/(Icon)_Quests.png";
 let currentMarker = null;
 let currentAnswerMarker = null;
@@ -313,7 +313,7 @@ export function placeMarker(e) {
     else {
         const marker = document.createElement("img");
         marker.style.pointerEvents = "none";
-        marker.src = MARKER_SRC;
+        marker.src = currentMarkSrc;
         marker.classList.add("marker");
         marker.style.position = "absolute";
         marker.style.width = markerSize + "px";
@@ -404,7 +404,7 @@ export function restoreMarker() {
     if (currentMarker && currentMarker.key === getLevelKey()) {
         const marker = document.createElement("img");
         marker.style.pointerEvents = "none";
-        marker.src = MARKER_SRC;
+        marker.src = currentMarkSrc;
         marker.classList.add("marker");
         marker.style.position = "absolute";
         marker.style.width = markerSize + "px";

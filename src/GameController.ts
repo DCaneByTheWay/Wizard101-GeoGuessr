@@ -1,6 +1,7 @@
 import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
 import { Difficulty, guessImages, GuessImage, difficultyToString, difficultyToValue } from "./ImageData.js";
 import { World, Area, worlds } from "./WorldData.js";
+import { currentMarkSrc } from "./Settings.js";
 
 const markerSize = 30;
 const answerMarkerSize = markerSize*2;
@@ -26,7 +27,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-const MARKER_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
 const ANSWER_MARKER_SRC = "./Images/Markers/(Icon)_Quests.png";
 
 let currentMarker: {key: string, xPercent: number, yPercent: number} | null = null;
@@ -394,7 +394,7 @@ export function placeMarker(e: PointerEvent): void {
         const marker = document.createElement("img");
     
         marker.style.pointerEvents = "none";
-        marker.src = MARKER_SRC;
+        marker.src = currentMarkSrc;
         marker.classList.add("marker")
         marker.style.position = "absolute";
         marker.style.width = markerSize + "px";
@@ -505,7 +505,7 @@ export function restoreMarker(): void {
     if (currentMarker && currentMarker.key === getLevelKey()){
         const marker = document.createElement("img");
         marker.style.pointerEvents = "none";
-        marker.src = MARKER_SRC;
+        marker.src = currentMarkSrc;
         marker.classList.add("marker")
         marker.style.position = "absolute";
         marker.style.width = markerSize + "px";

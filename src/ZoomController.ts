@@ -18,7 +18,8 @@ let translateX = 0;
 let translateY = 0;
 const MIN_SCALE = 1.0;
 const MAX_SCALE = 1.75;
-const ZOOM_SPEED = 0.05;
+const DEFAULT_ZOOM_SPEED = 0.05;
+let currentZoomSpeed = DEFAULT_ZOOM_SPEED;
 let zoomInTicks = 0;
 let zoomOutTicks = 0;
 let requiresZoomInThreshold = false;
@@ -60,7 +61,7 @@ export function init(container: HTMLElement, worlds: World[]): void {
             requiresZoomInThreshold = false;
         }
 
-        let newScale = currentScale + direction * ZOOM_SPEED;
+        let newScale = currentScale + direction * currentZoomSpeed;
 
         if (newScale >= MAX_SCALE) {
             currentScale = MAX_SCALE;
@@ -324,4 +325,8 @@ export function resetToSpiral(container: HTMLElement, worlds: World[]): void {
 
     render(container, currentLevel, worlds, currentWorld, currentArea);
     applyTransform();
+}
+
+export function setZoomSpeed(newZoomSpeed: number): void {
+    currentZoomSpeed = newZoomSpeed;
 }

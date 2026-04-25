@@ -1,3 +1,9 @@
+export const arcs = [
+    { name: "Arc 1", worlds: ["wizard-city", "krokotopia", "marleybone", "mooshu", "dragonspyre"] },
+    { name: "Arc 2", worlds: ["celestia", "zafaria", "avalon", "azteca", "khrysalis"] },
+    { name: "Arc 3", worlds: ["polaris", "mirage", "empyrea"] },
+    { name: "Side Quest", worlds: ["grizzleheim", "wysteria"] },
+];
 export const worlds = [
     {
         name: "Wizard City",
