@@ -164,9 +164,17 @@ export const guessImages: Record<string, GuessImage[]> = {
         {imgSrc: "Images/GuessImages/Celestia19.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
         {imgSrc: "Images/GuessImages/Celestia20.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
     ],
-    // "wysteria": [
-    //     {imgSrc: "Images/GuessImages/Wysteria1.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
-    // ],
+    "wysteria": [
+        {imgSrc: "Images/GuessImages/Wysteria1.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Wysteria2.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Wysteria3.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Wysteria4.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Wysteria5.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Wysteria6.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Wysteria7.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Wysteria8.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Wysteria9.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+    ],
     "zafaria": [
         {imgSrc: "Images/GuessImages/Zafaria1.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
         {imgSrc: "Images/GuessImages/Zafaria2.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
@@ -255,11 +263,32 @@ export const guessImages: Record<string, GuessImage[]> = {
         {imgSrc: "Images/GuessImages/Azteca34.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
         {imgSrc: "Images/GuessImages/Azteca35.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
     ],
-    // "khrysalis": [
-    //     {imgSrc: "Images/GuessImages/Khrysalis1.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
-    // ],
+    "khrysalis": [
+        {imgSrc: "Images/GuessImages/Khrysalis1.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis2.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis3.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis4.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis5.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis6.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis7.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis8.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis9.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis10.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis11.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis12.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis13.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis14.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis15.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis16.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis17.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis18.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis19.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis20.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis21.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis22.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis23.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+        {imgSrc: "Images/GuessImages/Khrysalis24.png", difficulty: Difficulty.UNDEFINED, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+    ],
     // TODO: add more arc 1 guessImages
-    // TODO: add Wysteria guessImages
-    // TODO: add Khrysalis guessImages
     // TODO: hardcode arc 2 solutionMarkers
 }
