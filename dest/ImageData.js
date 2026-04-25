@@ -4,7 +4,8 @@ export var Difficulty;
     Difficulty[Difficulty["EASY"] = 1] = "EASY";
     Difficulty[Difficulty["MEDIUM"] = 2] = "MEDIUM";
     Difficulty[Difficulty["HARD"] = 3] = "HARD";
-    Difficulty[Difficulty["GOOFY"] = 4] = "GOOFY";
+    Difficulty[Difficulty["VERY_HARD"] = 4] = "VERY_HARD";
+    Difficulty[Difficulty["GOOFY"] = 5] = "GOOFY";
     Difficulty[Difficulty["UNDEFINED"] = 999] = "UNDEFINED";
 })(Difficulty || (Difficulty = {}));
 export function difficultyToString(difficulty) {
@@ -17,6 +18,8 @@ export function difficultyToString(difficulty) {
             return "Medium";
         case Difficulty.HARD:
             return "Hard";
+        case Difficulty.VERY_HARD:
+            return "Very Hard";
         case Difficulty.GOOFY:
             return "Goofy";
         case Difficulty.UNDEFINED:
@@ -86,8 +89,143 @@ export const guessImages = {
         { imgSrc: "Images/GuessImages/Dragonspyre6.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: { key: "area:dragonspyre:The Drake Hatchery", xPercent: 53.1, yPercent: 61.7 } },
         { imgSrc: "Images/GuessImages/Dragonspyre7.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: { key: "area:dragonspyre:The Drake Hatchery", xPercent: 48.9, yPercent: 78.1 } },
     ],
+    "grizzleheim": [
+        { imgSrc: "Images/GuessImages/Grizzleheim1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim2.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim3.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim4.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim5.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim6.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim7.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim8.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim9.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim10.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim11.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim12.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim13.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim14.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim15.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Grizzleheim16.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:grizzleheim:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+    ],
+    "celestia": [
+        { imgSrc: "Images/GuessImages/Celestia1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia2.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia3.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia4.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia5.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia6.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia7.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia8.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia9.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia10.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia11.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia12.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia13.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia14.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia15.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia16.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia17.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia18.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia19.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Celestia20.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:celestia:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+    ],
+    // "wysteria": [
+    //     {imgSrc: "Images/GuessImages/Wysteria1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: {key: "area:wysteria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+    // ],
+    "zafaria": [
+        { imgSrc: "Images/GuessImages/Zafaria1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria2.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria3.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria4.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria5.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria6.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria7.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria8.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria9.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria10.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria11.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria12.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria13.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria14.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria15.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria16.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria17.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria18.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria19.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Zafaria20.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:zafaria:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+    ],
+    "avalon": [
+        { imgSrc: "Images/GuessImages/Avalon1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon2.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon3.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon4.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon5.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon6.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon7.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon8.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon9.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon10.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon11.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon12.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon13.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon14.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon15.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon16.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon17.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon18.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon19.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon20.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon21.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon22.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon23.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon24.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon25.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon26.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Avalon27.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:avalon:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+    ],
+    "azteca": [
+        { imgSrc: "Images/GuessImages/Azteca1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca2.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca3.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca4.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca5.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca6.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca7.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca8.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca9.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca10.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca11.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca12.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca13.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca14.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca15.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca16.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca17.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca18.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca19.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca20.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca21.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca22.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca23.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca24.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca25.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca26.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca27.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca28.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca29.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca30.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca31.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca32.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca33.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca34.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+        { imgSrc: "Images/GuessImages/Azteca35.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: { key: "area:azteca:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0 } },
+    ],
+    // "khrysalis": [
+    //     {imgSrc: "Images/GuessImages/Khrysalis1.png", difficulty: Difficulty.FREE, mapSize: 100, solutionMarker: {key: "area:khrysalis:AAAAAAAAAAAAAAA", xPercent: 0, yPercent: 0}},
+    // ],
     // TODO: add more arc 1 guessImages
-    // TODO: add arc 2 guessImages
-    // TODO: add arc 2 maps
+    // TODO: add Wysteria guessImages
+    // TODO: add Khrysalis guessImages
+    // TODO: hardcode arc 2 solutionMarkers
 };
 //# sourceMappingURL=ImageData.js.map

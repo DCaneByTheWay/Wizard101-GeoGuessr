@@ -3,7 +3,8 @@ export declare enum Difficulty {
     EASY = 1,
     MEDIUM = 2,
     HARD = 3,
-    GOOFY = 4,
+    VERY_HARD = 4,
+    GOOFY = 5,
     UNDEFINED = 999
 }
 export interface GuessImage {
