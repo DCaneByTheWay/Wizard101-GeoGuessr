@@ -217,6 +217,7 @@ body {
     background-color: rgba(0, 0, 0, 0.4);  /* dark track behind fill */
     border-radius: 14px;
     overflow: hidden;   /* critical — clips the fill to the track shape */
+    outline: 2px solid black;
     z-index: 9999;
 }
 
