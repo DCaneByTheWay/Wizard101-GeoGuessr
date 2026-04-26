@@ -200,7 +200,7 @@ export const worlds: World [] = [
             { name: "Deepwater",     imageSrc: "./Images/Maps/Avalon/Deepwater.png",    top: "34%", left: "80%", width: "15%", height: "6%"  },
             { name: "Dun Dara",      imageSrc: "./Images/Maps/Avalon/DunDara.png",      top: "24%", left: "14%", width: "9%",  height: "9%"  },
             { name: "High Road",     imageSrc: "./Images/Maps/Avalon/HighRoad.png",     top: "61%", left: "50%", width: "9%",  height: "9%"  },
-            { name: "LakeShore",     imageSrc: "./Images/Maps/Avalon/LakeShore.png",    top: "25%", left: "74%", width: "16%", height: "6%"  },
+            { name: "Lake Shore",     imageSrc: "./Images/Maps/Avalon/LakeShore.png",    top: "25%", left: "74%", width: "16%", height: "6%"  },
             { name: "Outer Yard",    imageSrc: "./Images/Maps/Avalon/OuterYard.png",    top: "28%", left: "50%", width: "10%", height: "9%"  },
             { name: "The Wild",      imageSrc: "./Images/Maps/Avalon/TheWild.png",      top: "45%", left: "38%", width: "9%",  height: "9%"  },
             { name: "The Wyrd",      imageSrc: "./Images/Maps/Avalon/TheWyrd.png",      top: "35%", left: "26%", width: "10%", height: "10%" },

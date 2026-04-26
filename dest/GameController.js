@@ -69,6 +69,8 @@ export function startRound() {
     // get and display difficulty in text
     const currentDifficulty = difficultyToString(currentGuessImage.difficulty);
     imgDifficulty.textContent = `Difficulty: ${currentDifficulty}`;
+    // i use the line below to help in the guess image creation process
+    //imgDifficulty!.textContent = `FILE_NAME: ${currentGuessImage?.imgSrc.replace('Images/GuessImages/','')}`;
     // get and display difficulty in meter
     const currentDifficultyValue = difficultyToValue(currentGuessImage.difficulty) * 100;
     difficultyBarFill.style.width = `${currentDifficultyValue}%`;
@@ -86,7 +88,6 @@ export function submitGuess() {
     // return early if guess has been submitted
     if (hasSubmittedGuess)
         return;
-    console.log("submitted!");
     hasSubmittedGuess = true;
     const answerMark = currentGuessImage?.solutionMarker;
     const score = getCalculatedScore(currentMarker, answerMark);
@@ -97,9 +98,6 @@ export function submitGuess() {
     // store answer mark again, in case we are on an incorrect map
     currentAnswerMarker = answerMark;
     scoreDisplay.textContent = `You Scored ${score.toFixed(0).toString()}/${MAX_SCORE}!`;
-    console.log(`current hovered area: ${getHoveredArea(currentMarker)?.name}`);
-    console.log(currentAnswerMarker);
-    console.log(answerMark);
     const [, , guessArea] = currentMarker.key.split(":");
     const [, answerWorld, answerArea] = answerMark.key.split(":");
     if (guessArea == answerArea) {
@@ -182,7 +180,10 @@ function getHoveredWorld(mark) {
 function getDistanceScoreCalculation(distance) {
     // derived from actual geoguessr score calculation
     // TODO: tweak this to make it better
-    // i want guesses within 1% distance to be MAX_SCORE (will figure out how to incorperate map size)
+    // perfect score if within 0.5%
+    if (distance <= 0.5)
+        return MAX_SCORE;
+    // else calculate score
     return WORLD_SCORE + AREA_SCORE + MAXIMUM_DISTANCE_SCORE * Math.E ** (-6.7 * distance / currentGuessImage?.mapSize);
 }
 /** Takes guessMark and answerMark, and returns score for the round */
@@ -249,37 +250,28 @@ export function getCalculatedScore(guessMark, answerMark) {
         const [, answerWorld, answerArea] = answerMark.key.split(":");
         // if world incorrect
         if (guessWorld !== answerWorld) {
-            console.log('incorrect world');
-            console.log(`guess: '${guessWorld}', answer: '${answerWorld}'`);
             score = 0;
         }
         // if world correct and area incorrect
         else if (guessArea !== answerArea) {
-            console.log('correct world, incorrect area');
-            console.log(`guess: '${guessArea}', answer: '${answerArea}'`);
             score = WORLD_SCORE;
         }
         // if world correct and area correct
         else if (guessArea === answerArea) {
-            console.log('correct world, correct area');
             const distance = getMarkDistance(guessMark, answerMark);
             score = getDistanceScoreCalculation(distance);
         }
         const distance = getMarkDistance(guessMark, answerMark);
-        console.log(`guess: ${guessMark.xPercent.toFixed(1)}, ${guessMark.yPercent.toFixed(1)}`);
-        console.log(`answer: ${answerMark.xPercent.toFixed(1)}, ${answerMark.yPercent.toFixed(1)}`);
-        console.log(`distance from answer: ${distance.toFixed(1)}`);
     }
     return score;
 }
 export function getRandomImagePath() {
     //const worldName = "Dragonspyre";
     //const imageList = Object.values(guessImages).flat().filter(img => !img.imgSrc.includes('Dragonspyre'));
-    const imageList = Object.values(guessImages).flat().filter(img => (img.imgSrc.includes('City') && img.difficulty >= Difficulty.HARD && img.difficulty !== Difficulty.UNDEFINED));
+    const imageList = Object.values(guessImages).flat().filter(img => (img.difficulty !== Difficulty.GOOFY));
     //const imageList = Object.values(guessImages).flat();
     const randomGuessImage = imageList[Math.floor(Math.random() * imageList.length)];
     const imgSrc = randomGuessImage.imgSrc;
-    //console.log(`current img: ${imgSrc}`)
     currentGuessImage = randomGuessImage;
     // set icon to goofy src on goofy guess
     if (currentGuessImage.difficulty === Difficulty.GOOFY) {
