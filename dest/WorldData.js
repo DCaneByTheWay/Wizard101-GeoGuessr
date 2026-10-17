@@ -1,8 +1,15 @@
+export var ArcID;
+(function (ArcID) {
+    ArcID["ARC_1"] = "Arc 1";
+    ArcID["ARC_2"] = "Arc 2";
+    ArcID["ARC_3"] = "Arc 3";
+    ArcID["SIDE_ARC"] = "Side Arc";
+})(ArcID || (ArcID = {}));
 export const arcs = [
-    { name: "Arc 1", worlds: ["wizard-city", "krokotopia", "marleybone", "mooshu", "dragonspyre"] },
-    { name: "Arc 2", worlds: ["celestia", "zafaria", "avalon", "azteca", "khrysalis"] },
-    { name: "Arc 3", worlds: ["polaris", "mirage", "empyrea"] },
-    { name: "Side Quest", worlds: ["grizzleheim", "wysteria"] },
+    { name: ArcID.ARC_1, worlds: ["wizard-city", "krokotopia", "marleybone", "mooshu", "dragonspyre"] },
+    { name: ArcID.ARC_2, worlds: ["celestia", "zafaria", "avalon", "azteca", "khrysalis"] },
+    { name: ArcID.ARC_3, worlds: ["polaris", "mirage", "empyrea"] },
+    { name: ArcID.SIDE_ARC, worlds: ["grizzleheim", "wysteria"] },
 ];
 export const worlds = [
     {

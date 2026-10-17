@@ -1,6 +1,6 @@
 import { getLevelKey, getTransform, resetToSpiral } from "./ZoomController.js";
 import { Difficulty, guessImages, difficultyToString, difficultyToValue } from "./ImageData.js";
-import { worlds } from "./WorldData.js";
+import { worlds, ArcID, arcs } from "./WorldData.js";
 import { currentMarkSrc, setMarkSkinButtonSrc, setMarkSrc } from "./Settings.js";
 const markerSize = 30;
 const answerMarkerSize = markerSize * 2;
@@ -27,6 +27,14 @@ let lastNonGoofyMarkerSrc = currentMarkSrc;
 let currentMarker = null;
 let currentAnswerMarker = null;
 let hasSubmittedGuess = false;
+export let enabledArcs = {
+    [ArcID.ARC_1]: true,
+    [ArcID.ARC_2]: true,
+    [ArcID.ARC_3]: false,
+    [ArcID.SIDE_ARC]: true
+};
+export let enabledWorlds = new Set(arcs.filter(arc => enabledArcs[arc.name])
+    .flatMap(arc => arc.worlds));
 const roundFinalizationDiv = document.querySelector(".round-finalization");
 const submitAnswerButton = document.getElementById("submit-guess-button");
 const scoreDisplay = document.getElementById("score-display");
@@ -268,8 +276,11 @@ export function getCalculatedScore(guessMark, answerMark) {
 export function getRandomImagePath() {
     //const worldName = "Dragonspyre";
     //const imageList = Object.values(guessImages).flat().filter(img => !img.imgSrc.includes('Dragonspyre'));
-    const imageList = Object.values(guessImages).flat().filter(img => (img.difficulty !== Difficulty.GOOFY));
     //const imageList = Object.values(guessImages).flat();
+    const imageList = Object.entries(guessImages)
+        .filter(([worldClass]) => enabledWorlds.has(worldClass))
+        .flatMap(([, images]) => images)
+        .filter(image => image.difficulty !== Difficulty.GOOFY);
     const randomGuessImage = imageList[Math.floor(Math.random() * imageList.length)];
     const imgSrc = randomGuessImage.imgSrc;
     currentGuessImage = randomGuessImage;

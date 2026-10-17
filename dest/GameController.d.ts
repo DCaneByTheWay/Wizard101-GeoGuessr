@@ -1,4 +1,7 @@
+import { ArcID } from "./WorldData.js";
 export declare const GOOFY_MARKER_SRC = "./Images/Markers/(Icon)_Shadow_Trickster.png";
+export declare let enabledArcs: Record<ArcID, boolean>;
+export declare let enabledWorlds: Set<string>;
 export declare const nextRoundButton: HTMLElement | null;
 export declare function setBackgroundImage(src: string): void;
 export declare function startRound(): void;

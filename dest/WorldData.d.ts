@@ -14,8 +14,14 @@ export interface World {
     areas: Area[];
 }
 export interface Arc {
-    name: string;
+    name: ArcID;
     worlds: string[];
+}
+export declare enum ArcID {
+    ARC_1 = "Arc 1",
+    ARC_2 = "Arc 2",
+    ARC_3 = "Arc 3",
+    SIDE_ARC = "Side Arc"
 }
 export declare const arcs: Arc[];
 export declare const worlds: World[];
