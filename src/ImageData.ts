@@ -222,7 +222,7 @@ export const guessImages: Record<string, GuessImage[]> = {
         {imgSrc: "Images/GuessImages/Avalon22.png", difficulty: Difficulty.HARD, mapSize: 100, solutionMarker: {key: "area:avalon:The Wild", xPercent: 69.5, yPercent: 37.4}},
         {imgSrc: "Images/GuessImages/Avalon23.png", difficulty: Difficulty.HARD, mapSize: 100, solutionMarker: {key: "area:avalon:Caer Lyon", xPercent: 24.5, yPercent: 49.1}},
         {imgSrc: "Images/GuessImages/Avalon24.png", difficulty: Difficulty.EASY, mapSize: 100, solutionMarker: {key: "area:avalon:Caliburn", xPercent: 43.3, yPercent: 51.3}},
-        {imgSrc: "Images/GuessImages/Avalon25.png", difficulty: Difficulty.HARD, mapSize: 100, solutionMarker: {key: "area:avalon:High Road", xPercent: 68.7, yPercent: 39.7}},
+        {imgSrc: "Images/GuessImages/Avalon25.png", difficulty: Difficulty.MEDIUM, mapSize: 100, solutionMarker: {key: "area:avalon:High Road", xPercent: 68.7, yPercent: 39.7}},
         {imgSrc: "Images/GuessImages/Avalon26.png", difficulty: Difficulty.VERY_HARD, mapSize: 100, solutionMarker: {key: "area:avalon:Caer Lyon", xPercent: 54.6, yPercent: 81.5}},
         {imgSrc: "Images/GuessImages/Avalon27.png", difficulty: Difficulty.HARD, mapSize: 100, solutionMarker: {key: "area:avalon:The Wild", xPercent: 68.9, yPercent: 55.2}},
     ],
