@@ -242,17 +242,18 @@ body {
     position: absolute;
     top: 8px;
     right: 16px;
-    width: 24px;
-    height: 24px;
     cursor: pointer;
-    color: white;
+    color: rgb(30, 2, 90);
     z-index: 10;
-    font-size: 24px;
     text-shadow:
-    -2px -2px 0 black,
-     2px -2px 0 black,
-    -2px  2px 0 black,
-     2px  2px 0 black;   
+    -1px -1px 0 gold,
+     1px -1px 0 gold,
+    -1px  1px 0 gold,
+     1px  1px 0 gold;   
+    transition: transform .4s ease-in-out;
+}
+#settings-gear:hover {
+  transform: rotate(-45deg);
 }
 
 #settings-dialog {
