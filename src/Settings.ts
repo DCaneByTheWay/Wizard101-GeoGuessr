@@ -1,4 +1,4 @@
-import { rerenderMarkers, setLastNonGoofyMarkerSrc, enabledArcs, enabledWorlds,} from "./GameController.js";
+import { rerenderMarkers, setLastNonGoofyMarkerSrc, enabledArcs, enabledWorlds, startRound,} from "./GameController.js";
 import { ArcID, arcs } from "./WorldData.js";
 import { setZoomSpeed } from "./ZoomController.js";
 
@@ -32,9 +32,19 @@ export function setMarkSkinButtonSrc(newMarkSrc: string): void {
 }
 
 function updateSelectedArcs(): void {
-    console.log(`1 ${arc1Checkbox!.checked}`);
-    console.log(`side ${sideArcCheckbox!.checked}`);
-    console.log(`2 ${arc2Checkbox!.checked}`);
+
+    // if no arcs are checked, do nothing and update button text to alert user
+    if (
+        !(arc1Checkbox!.checked || 
+        arc2Checkbox!.checked || 
+        arc3Checkbox!.checked ||
+        sideArcCheckbox!.checked)
+    ){
+        updateSelectedArcsSubmitButton!.textContent = 'Select some worlds to play!'
+        return
+    }
+
+
     updateSelectedArcsSubmitButton!.style.display = "none";
     enabledArcs[ArcID.ARC_1] = arc1Checkbox!.checked;
     enabledArcs[ArcID.ARC_2] = arc2Checkbox!.checked;
@@ -51,12 +61,20 @@ function updateSelectedArcs(): void {
         }
     }
     
-    console.log(enabledArcs)
+    //console.log(enabledArcs)
+
+    // start new round with new arc settings
+    startRound();
 }
 
 function showUpdateSelectedArcsSubmitButton(): void {
+    // if hidden, reveal button
     if (updateSelectedArcsSubmitButton!.style.display === "none")
         updateSelectedArcsSubmitButton!.style.display = "inline-block";
+    
+    // confirm button text
+    if (updateSelectedArcsSubmitButton!.textContent != "Update Selected Arcs")
+        updateSelectedArcsSubmitButton!.textContent = "Update Selected Arcs"
 }
 
 document.querySelectorAll(".mark-skin-option").forEach((img) => {

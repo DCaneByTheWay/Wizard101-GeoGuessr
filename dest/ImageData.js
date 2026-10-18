@@ -48,7 +48,6 @@ export function difficultyToValue(difficulty) {
             return -1;
     }
 }
-// TODO: implement way to track arc for gamemodes like arc1, arc2, etc...
 // TODO: set mapsize for all maps
 export const guessImages = {
     "wizard-city": [

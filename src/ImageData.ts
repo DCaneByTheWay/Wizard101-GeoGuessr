@@ -61,7 +61,6 @@ export function difficultyToValue(difficulty: Difficulty): number {
     }
 }
 
-// TODO: implement way to track arc for gamemodes like arc1, arc2, etc...
 // TODO: set mapsize for all maps
 
 export const guessImages: Record<string, GuessImage[]> = {
