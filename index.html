@@ -45,19 +45,77 @@
 
         <div class="slidecontainer">
             <label for="zoom-slider">Scroll Zoom Speed</label>
+            <!-- TODO: Create reset button -->
             <input id="zoom-slider" type="range" min="0.01" max="0.2" value="0.05" step="0.01" class="slider">
         </div>
 
-        <details id="arc-selection">
-            <summary>Arcs Selected</summary>
+        <!-- reference this reddit thread for world name abbreviations
+            https://www.reddit.com/r/Wizard101/s/DvCPhFq3Jq
+        -->
+        <details id="arc-selection" class="settings-selection">
+            <summary>Included Arcs</summary>
             <div class="arc-options">
-                <label><input type="checkbox" id="arc1-checkbox" checked /> Arc 1 (Wizard City - Dragonspyre)</label>
-                <label><input type="checkbox" id="sidearc-checkbox" checked /> Side Arc (Grizzleheim, Wysteria)</label>
-                <label><input type="checkbox" id="arc2-checkbox" checked /> Arc 2 (Celestia - Khrysalis)</label>
-                <label class="arc-disabled"><input type="checkbox" id="arc3-checkbox" disabled /> Arc 3 (Polaris - Empyrea)</label>
-                <button type="submit" id="arc-select-submit-button">Update Selected Arcs</button>
+                <details>
+                    <summary>
+                        <label><input type="checkbox" id="arc1-checkbox" checked /> Arc 1 (Wizard City - Dragonspyre)</label>
+                    </summary>
+                    <div class="arc-options">
+                        <label><input type="checkbox" data-world="wizard-city" checked /> Wizard City </label>
+                        <label><input type="checkbox" data-world="krokotopia" checked /> Krokotopia </label>
+                        <label><input type="checkbox" data-world="marleybone" checked /> Marleybone </label>
+                        <label><input type="checkbox" data-world="mooshu" checked /> Mooshu </label>
+                        <label><input type="checkbox" data-world="dragonspyre" checked /> Dragonspyre </label>
+                    </div>
+                </details>
+                <details>
+                    <summary>
+                        <label><input type="checkbox" id="arc2-checkbox" checked /> Arc 2 (Celestia - Khrysalis)</label>
+                    </summary>
+                    <div class="arc-options">
+                        <label><input type="checkbox" data-world="celestia" checked /> Celestia </label>
+                        <label><input type="checkbox" data-world="zafaria" checked /> Zafaria </label>
+                        <label><input type="checkbox" data-world="avalon" checked /> Avalon </label>
+                        <label><input type="checkbox" data-world="azteca" checked /> Azteca </label>
+                        <label><input type="checkbox" data-world="khrysalis" checked /> Khrysalis </label>
+                    </div>
+                </details>
+                <details>
+                    <summary>
+                        <label class="arc-disabled"><input type="checkbox" id="arc3-checkbox" disabled /> Arc 3 (Polaris - Empyrea)</label>
+                    </summary>
+                    <div class="arc-options">
+                        <label><input class="arc-disabled" type="checkbox" data-world="polaris" disabled /> Polaris </label>
+                        <label><input class="arc-disabled" type="checkbox" data-world="mirage" disabled /> Mirage </label>
+                        <label><input class="arc-disabled" type="checkbox" data-world="empyrea" disabled /> Empyrea </label>
+                    </div>
+                </details>
+                <details>
+                    <summary>
+                        <label><input type="checkbox" id="sidearc-checkbox" checked /> Side Arc (Grizzleheim, Wysteria)</label>
+                    </summary>
+                    <div class="arc-options">
+                        <label><input type="checkbox" data-world="grizzleheim" checked /> Grizzleheim </label>
+                        <label><input type="checkbox" data-world="wysteria" checked /> Wysteria </label>
+                    </div>
+                </details>
             </div>
         </details>
+
+
+        <details id="difficulty-selection" class="settings-selection">
+            <summary>Included Difficulties</summary>
+            <div class="arc-options">
+                <!-- TODO: Add individual world selection -->
+                <label><input type="checkbox" id="free-checkbox" checked /> Free </label>
+                <label><input type="checkbox" id="easy-checkbox" checked /> Easy </label>
+                <label><input type="checkbox" id="medium-checkbox" checked /> Medium </label>
+                <label><input type="checkbox" id="hard-checkbox" checked /> Hard </label>
+                <label><input type="checkbox" id="very-hard-checkbox" checked /> Very Hard </label>
+                <label><input type="checkbox" id="goofy-checkbox" checked /> Goofy </label>
+            </div>
+        </details>
+        <button type="submit" id="arc-select-submit-button">Update Settings</button>
+        <!-- TODO: Add difficulty selection -->
 
         <button id="settings-close-button">Close</button>
     </dialog>

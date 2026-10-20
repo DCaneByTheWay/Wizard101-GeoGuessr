@@ -35,16 +35,8 @@ let currentMarker: {key: string, xPercent: number, yPercent: number} | null = nu
 let currentAnswerMarker: {key: string, xPercent: number, yPercent: number} | null = null;
 let hasSubmittedGuess = false;
 
-export let enabledArcs: Record<ArcID, boolean> = {
-    [ArcID.ARC_1]: true,
-    [ArcID.ARC_2]: true,
-    [ArcID.ARC_3]: false,
-    [ArcID.SIDE_ARC]: true
-}
-
 export let enabledWorlds = new Set(
-    arcs.filter(arc => enabledArcs[arc.name])
-        .flatMap(arc => arc.worlds)
+    arcs.flatMap(arc => arc.worlds)
 );
 
 const roundFinalizationDiv = document.querySelector<HTMLDivElement>(".round-finalization");

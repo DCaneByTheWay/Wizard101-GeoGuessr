@@ -1,4 +1,4 @@
-import { rerenderMarkers, setLastNonGoofyMarkerSrc, enabledArcs, enabledWorlds, startRound,} from "./GameController.js";
+import { rerenderMarkers, setLastNonGoofyMarkerSrc, enabledWorlds, startRound,} from "./GameController.js";
 import { ArcID, arcs } from "./WorldData.js";
 import { setZoomSpeed } from "./ZoomController.js";
 
@@ -10,9 +10,10 @@ const markSkinDialogElement = document.getElementById("mark-skin-dialog") as HTM
 const zoomSpeedSlider = document.getElementById("zoom-slider");
 const markSkinDialogCloseButton = document.getElementById("mark-skin-dialog-close-button");
 const arc1Checkbox = document.getElementById("arc1-checkbox") as HTMLInputElement;
-const sideArcCheckbox = document.getElementById("sidearc-checkbox") as HTMLInputElement;
-const arc2Checkbox = document.getElementById("arc2-checkbox") as HTMLInputElement;
-const arc3Checkbox = document.getElementById("arc3-checkbox") as HTMLInputElement;
+//const sideArcCheckbox = document.getElementById("sidearc-checkbox") as HTMLInputElement;
+//const arc2Checkbox = document.getElementById("arc2-checkbox") as HTMLInputElement;
+//const arc3Checkbox = document.getElementById("arc3-checkbox") as HTMLInputElement;
+const worldCheckboxes = document.querySelectorAll<HTMLInputElement>("input[data-world]");
 const updateSelectedArcsSubmitButton = document.getElementById("arc-select-submit-button");
 updateSelectedArcsSubmitButton!.style.display = "none";
 
@@ -31,39 +32,39 @@ export function setMarkSkinButtonSrc(newMarkSrc: string): void {
     (markSkinButton as HTMLImageElement).src = newMarkSrc;
 }
 
-function updateSelectedArcs(): void {
+function updateSelectedDifficulties(): void {
 
-    // if no arcs are checked, do nothing and update button text to alert user
-    if (
-        !(arc1Checkbox!.checked || 
-        arc2Checkbox!.checked || 
-        arc3Checkbox!.checked ||
-        sideArcCheckbox!.checked)
-    ){
+}
+
+function updateSelectedWorlds(): void {
+
+    // get selected worlds from checkboxes
+    const selectedWorlds = Array.from(worldCheckboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.dataset.world!);
+
+
+    // if no worlds are selected, do nothing and update button text to alert user
+    if (selectedWorlds.length == 0){
         updateSelectedArcsSubmitButton!.textContent = 'Select some worlds to play!'
         return
     }
-
-
+    
+    // hide button
     updateSelectedArcsSubmitButton!.style.display = "none";
-    enabledArcs[ArcID.ARC_1] = arc1Checkbox!.checked;
-    enabledArcs[ArcID.ARC_2] = arc2Checkbox!.checked;
-    enabledArcs[ArcID.SIDE_ARC] = sideArcCheckbox!.checked;
-    //enabledArcs[ArcID.ARC_3] = arc3Checkbox!.checked
     
+    // empty and repopulate enabled worlds
     enabledWorlds.clear();
-
-    for (const arc of arcs) {
-        if (enabledArcs[arc.name]) {
-            for (const world of arc.worlds) {
-                enabledWorlds.add(world);
-            }
-        }
-    }
+    selectedWorlds.forEach(world => enabledWorlds.add(world))
     
-    //console.log(enabledArcs)
+    //console.log(enabledWorlds)
+}
 
-    // start new round with new arc settings
+function updateSettings(): void {
+
+    updateSelectedWorlds();
+    updateSelectedDifficulties();
+    // start new round with new applied settings
     startRound();
 }
 
@@ -73,8 +74,8 @@ function showUpdateSelectedArcsSubmitButton(): void {
         updateSelectedArcsSubmitButton!.style.display = "inline-block";
     
     // confirm button text
-    if (updateSelectedArcsSubmitButton!.textContent != "Update Selected Arcs")
-        updateSelectedArcsSubmitButton!.textContent = "Update Selected Arcs"
+    if (updateSelectedArcsSubmitButton!.textContent != "Update Settings")
+        updateSelectedArcsSubmitButton!.textContent = "Update Settings"
 }
 
 document.querySelectorAll(".mark-skin-option").forEach((img) => {
@@ -94,8 +95,12 @@ zoomSpeedSlider?.addEventListener("input", () => {
 
 settingsGear?.addEventListener("click", () => settingsDialog.showModal());
 settingsCloseButton?.addEventListener("click", () => settingsDialog.close());
-updateSelectedArcsSubmitButton!.onclick = updateSelectedArcs;
-arc1Checkbox!.onclick = showUpdateSelectedArcsSubmitButton
-sideArcCheckbox!.onclick = showUpdateSelectedArcsSubmitButton
-arc2Checkbox!.onclick = showUpdateSelectedArcsSubmitButton
-arc3Checkbox!.onclick = showUpdateSelectedArcsSubmitButton
+updateSelectedArcsSubmitButton!.onclick = updateSettings;
+worldCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener("change", showUpdateSelectedArcsSubmitButton)
+});
+
+//arc1Checkbox!.onclick = showUpdateSelectedArcsSubmitButton
+//sideArcCheckbox!.onclick = showUpdateSelectedArcsSubmitButton
+//arc2Checkbox!.onclick = showUpdateSelectedArcsSubmitButton
+//arc3Checkbox!.onclick = showUpdateSelectedArcsSubmitButton
