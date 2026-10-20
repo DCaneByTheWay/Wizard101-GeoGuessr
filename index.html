@@ -57,7 +57,7 @@
             <div class="arc-options">
                 <details>
                     <summary>
-                        <label><input type="checkbox" id="arc1-checkbox" checked /> Arc 1 (Wizard City - Dragonspyre)</label>
+                        <label><input type="checkbox" id="arc1-checkbox" data-arc="Arc 1" checked /> Arc 1 (Wizard City - Dragonspyre)</label>
                     </summary>
                     <div class="arc-options">
                         <label><input type="checkbox" data-world="wizard-city" checked /> Wizard City </label>
@@ -69,7 +69,7 @@
                 </details>
                 <details>
                     <summary>
-                        <label><input type="checkbox" id="arc2-checkbox" checked /> Arc 2 (Celestia - Khrysalis)</label>
+                        <label><input type="checkbox" id="arc2-checkbox" data-arc="Arc 2" checked /> Arc 2 (Celestia - Khrysalis)</label>
                     </summary>
                     <div class="arc-options">
                         <label><input type="checkbox" data-world="celestia" checked /> Celestia </label>
@@ -81,7 +81,7 @@
                 </details>
                 <details>
                     <summary>
-                        <label class="arc-disabled"><input type="checkbox" id="arc3-checkbox" disabled /> Arc 3 (Polaris - Empyrea)</label>
+                        <label class="arc-disabled"><input type="checkbox" id="Arc 3" data-arc="arc3-checkbox" disabled /> Arc 3 (Polaris - Empyrea)</label>
                     </summary>
                     <div class="arc-options">
                         <label><input class="arc-disabled" type="checkbox" data-world="polaris" disabled /> Polaris </label>
@@ -91,7 +91,7 @@
                 </details>
                 <details>
                     <summary>
-                        <label><input type="checkbox" id="sidearc-checkbox" checked /> Side Arc (Grizzleheim, Wysteria)</label>
+                        <label><input type="checkbox" id="sidearc-checkbox" data-arc="Side Arc" checked /> Side Arc (Grizzleheim, Wysteria)</label>
                     </summary>
                     <div class="arc-options">
                         <label><input type="checkbox" data-world="grizzleheim" checked /> Grizzleheim </label>
@@ -103,15 +103,15 @@
 
 
         <details id="difficulty-selection" class="settings-selection">
-            <summary>Included Difficulties</summary>
+            <summary>Included Difficulties (WIP)</summary>
             <div class="arc-options">
-                <!-- TODO: Add individual world selection -->
-                <label><input type="checkbox" id="free-checkbox" checked /> Free </label>
-                <label><input type="checkbox" id="easy-checkbox" checked /> Easy </label>
-                <label><input type="checkbox" id="medium-checkbox" checked /> Medium </label>
-                <label><input type="checkbox" id="hard-checkbox" checked /> Hard </label>
-                <label><input type="checkbox" id="very-hard-checkbox" checked /> Very Hard </label>
-                <label><input type="checkbox" id="goofy-checkbox" checked /> Goofy </label>
+                <!-- TODO: Add difficulty selection -->
+                <label><input type="checkbox" id="free-checkbox" class="arc-disabled" disabled /> Free </label>
+                <label><input type="checkbox" id="easy-checkbox" class="arc-disabled" disabled /> Easy </label>
+                <label><input type="checkbox" id="medium-checkbox" class="arc-disabled" disabled /> Medium </label>
+                <label><input type="checkbox" id="hard-checkbox" class="arc-disabled" disabled /> Hard </label>
+                <label><input type="checkbox" id="very-hard-checkbox" class="arc-disabled" disabled /> Very Hard </label>
+                <!-- <label><input type="checkbox" id="goofy-checkbox" class="arc-disabled" disabled /> Goofy </label> -->
             </div>
         </details>
         <button type="submit" id="arc-select-submit-button">Update Settings</button>

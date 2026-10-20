@@ -9,13 +9,12 @@ const markSkinButton = document.getElementById("mark-skin-button");
 const markSkinDialogElement = document.getElementById("mark-skin-dialog") as HTMLDialogElement;
 const zoomSpeedSlider = document.getElementById("zoom-slider");
 const markSkinDialogCloseButton = document.getElementById("mark-skin-dialog-close-button");
-const arc1Checkbox = document.getElementById("arc1-checkbox") as HTMLInputElement;
-//const sideArcCheckbox = document.getElementById("sidearc-checkbox") as HTMLInputElement;
-//const arc2Checkbox = document.getElementById("arc2-checkbox") as HTMLInputElement;
-//const arc3Checkbox = document.getElementById("arc3-checkbox") as HTMLInputElement;
 const worldCheckboxes = document.querySelectorAll<HTMLInputElement>("input[data-world]");
+const arcCheckboxes = document.querySelectorAll<HTMLInputElement>("input[data-arc]");
 const updateSelectedArcsSubmitButton = document.getElementById("arc-select-submit-button");
 updateSelectedArcsSubmitButton!.style.display = "none";
+updateSelectedArcsSubmitButton!.style.userSelect = 'none';   
+let spamCount = 0; // temporary (surely) tubermover QA precaution
 
 const DEFAULT_MARK_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
 export let currentMarkSrc = DEFAULT_MARK_SRC;
@@ -32,11 +31,11 @@ export function setMarkSkinButtonSrc(newMarkSrc: string): void {
     (markSkinButton as HTMLImageElement).src = newMarkSrc;
 }
 
-function updateSelectedDifficulties(): void {
-
+function updateSelectedDifficulties(): boolean {
+    return true
 }
 
-function updateSelectedWorlds(): void {
+function updateSelectedWorlds(): boolean {
 
     // get selected worlds from checkboxes
     const selectedWorlds = Array.from(worldCheckboxes)
@@ -46,8 +45,25 @@ function updateSelectedWorlds(): void {
 
     // if no worlds are selected, do nothing and update button text to alert user
     if (selectedWorlds.length == 0){
-        updateSelectedArcsSubmitButton!.textContent = 'Select some worlds to play!'
-        return
+        updateSelectedArcsSubmitButton!.textContent = "Select some worlds to play!"
+
+
+        // temp tubermover QA precaution
+        spamCount++;
+
+        if (spamCount >= 50) {
+            updateSelectedArcsSubmitButton!.textContent = "Tubermover"
+        }
+        if (spamCount >= 57) {
+            updateSelectedArcsSubmitButton!.style.fontSize = `${spamCount - 41}px`
+        }
+        if (spamCount == 80) {
+            updateSelectedArcsSubmitButton!.style.background = "red"
+        }
+        if (spamCount >= 150) {
+            window.location.href = "https://www.youtube.com/shorts/2A7nINfgxfc";
+        }
+        return false
     }
     
     // hide button
@@ -56,16 +72,20 @@ function updateSelectedWorlds(): void {
     // empty and repopulate enabled worlds
     enabledWorlds.clear();
     selectedWorlds.forEach(world => enabledWorlds.add(world))
+
+    // return success
+    return true
     
     //console.log(enabledWorlds)
 }
 
 function updateSettings(): void {
 
-    updateSelectedWorlds();
-    updateSelectedDifficulties();
-    // start new round with new applied settings
-    startRound();
+    const success = updateSelectedWorlds() && updateSelectedDifficulties();
+
+    // if both successful, start new round with new applied settings
+    if (success)
+        startRound();
 }
 
 function showUpdateSelectedArcsSubmitButton(): void {
@@ -100,7 +120,32 @@ worldCheckboxes.forEach(checkbox => {
     checkbox.addEventListener("change", showUpdateSelectedArcsSubmitButton)
 });
 
-//arc1Checkbox!.onclick = showUpdateSelectedArcsSubmitButton
-//sideArcCheckbox!.onclick = showUpdateSelectedArcsSubmitButton
-//arc2Checkbox!.onclick = showUpdateSelectedArcsSubmitButton
-//arc3Checkbox!.onclick = showUpdateSelectedArcsSubmitButton
+const worldCheckboxByClass = new Map(
+    Array.from(worldCheckboxes, checkbox => [
+        checkbox.dataset.world,
+        checkbox,
+    ])
+);
+
+// check / uncheck all checkboxes under arc
+arcCheckboxes.forEach(arcCheckbox => {
+    arcCheckbox.addEventListener("change", () => {
+        const arc = arcs.find(({ name }) => name === arcCheckbox.dataset.arc);
+
+        if (!arc) {
+            throw new Error(`No arc found for "${arcCheckbox.dataset.arc}"`);
+        }
+
+        for (const worldClass of arc.worlds) {
+            const worldCheckbox = worldCheckboxByClass.get(worldClass);
+
+            if (!worldCheckbox) {
+                throw new Error(`No checkbox found for world "${worldClass}"`);
+            }
+
+            worldCheckbox.checked = arcCheckbox.checked;
+        }
+
+        showUpdateSelectedArcsSubmitButton();
+    });
+});
