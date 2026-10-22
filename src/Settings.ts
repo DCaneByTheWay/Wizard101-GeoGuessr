@@ -1,13 +1,13 @@
 import { rerenderMarkers, setLastNonGoofyMarkerSrc, enabledWorlds, startRound,} from "./GameController.js";
-import { ArcID, arcs } from "./WorldData.js";
-import { setZoomSpeed } from "./ZoomController.js";
+import { arcs } from "./WorldData.js";
+import { setZoomSpeed, setDefaultZoomSpeed} from "./ZoomController.js";
 
 const settingsGear = document.getElementById("settings-gear");
 const settingsDialog = document.getElementById("settings-dialog") as HTMLDialogElement;
 const settingsCloseButton = document.getElementById("settings-close-button");
 const markSkinButton = document.getElementById("mark-skin-button");
 const markSkinDialogElement = document.getElementById("mark-skin-dialog") as HTMLDialogElement;
-const zoomSpeedSlider = document.getElementById("zoom-slider");
+export const zoomSpeedSlider = document.getElementById("zoom-slider") as HTMLInputElement;
 const markSkinDialogCloseButton = document.getElementById("mark-skin-dialog-close-button");
 const worldCheckboxes = document.querySelectorAll<HTMLInputElement>("input[data-world]");
 const arcCheckboxes = document.querySelectorAll<HTMLInputElement>("input[data-arc]");
@@ -15,6 +15,8 @@ const updateSelectedArcsSubmitButton = document.getElementById("arc-select-submi
 updateSelectedArcsSubmitButton!.style.display = "none";
 updateSelectedArcsSubmitButton!.style.userSelect = 'none';   
 let spamCount = 0; // temporary (surely) tubermover QA precaution
+
+export const zoomResetButton = document.getElementById("zoom-reset-button");
 
 const DEFAULT_MARK_SRC = "./Images/Markers/(Icon)_Place_Mark.png";
 export let currentMarkSrc = DEFAULT_MARK_SRC;
@@ -109,8 +111,7 @@ document.querySelectorAll(".mark-skin-option").forEach((img) => {
 });
 
 zoomSpeedSlider?.addEventListener("input", () => {
-    const slider = zoomSpeedSlider as HTMLInputElement;
-    setZoomSpeed(parseFloat(slider.value));
+    setZoomSpeed(parseFloat(zoomSpeedSlider.value));
 })
 
 settingsGear?.addEventListener("click", () => settingsDialog.showModal());
@@ -149,3 +150,5 @@ arcCheckboxes.forEach(arcCheckbox => {
         showUpdateSelectedArcsSubmitButton();
     });
 });
+
+zoomResetButton!.onclick = setDefaultZoomSpeed;

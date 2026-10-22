@@ -4,6 +4,7 @@ export declare enum ZoomLevel {
     WORLD = 1,
     AREA = 2
 }
+export declare const DEFAULT_ZOOM_SPEED = 0.05;
 export declare function init(container: HTMLElement, worlds: World[]): void;
 export declare function saveAndScaleTransform(sizeRatio: number): void;
 export declare function restoreTransform(): void;
@@ -17,4 +18,5 @@ export declare function getTransform(): {
 /** Resets map to spiral level */
 export declare function resetToSpiral(container: HTMLElement, worlds: World[]): void;
 export declare function setZoomSpeed(newZoomSpeed: number): void;
+export declare function setDefaultZoomSpeed(): void;
 //# sourceMappingURL=ZoomController.d.ts.map

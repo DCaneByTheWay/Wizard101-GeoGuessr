@@ -1,6 +1,7 @@
 import { World, Area } from "./WorldData.js";
 import { render } from "./Renderer.js";
 import { saveMarker, restoreMarker } from "./GameController.js";
+import { zoomSpeedSlider, zoomResetButton } from "./Settings.js"
 
 export enum ZoomLevel {
     SPIRAL = 0,
@@ -18,7 +19,7 @@ let translateX = 0;
 let translateY = 0;
 const MIN_SCALE = 1.0;
 const MAX_SCALE = 1.75;
-const DEFAULT_ZOOM_SPEED = 0.05;
+export const DEFAULT_ZOOM_SPEED = 0.05;
 let currentZoomSpeed = DEFAULT_ZOOM_SPEED;
 let zoomInTicks = 0;
 let zoomOutTicks = 0;
@@ -329,4 +330,13 @@ export function resetToSpiral(container: HTMLElement, worlds: World[]): void {
 
 export function setZoomSpeed(newZoomSpeed: number): void {
     currentZoomSpeed = newZoomSpeed;
+    if (currentZoomSpeed != DEFAULT_ZOOM_SPEED) {
+        zoomResetButton!.style.visibility = "visible"
+    }
+}
+
+export function setDefaultZoomSpeed(): void {
+    setZoomSpeed(DEFAULT_ZOOM_SPEED);
+    zoomSpeedSlider.value = String(DEFAULT_ZOOM_SPEED);
+    zoomResetButton!.style.visibility = "hidden"
 }
